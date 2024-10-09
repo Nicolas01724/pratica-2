@@ -6,9 +6,9 @@ class Escola extends Database {
         parent::__construct();
     }
 
-    public function adicionar(array $values) {
+    public function adicionar(array $values): bool | string {
         $table = $this->table;
-        
-        $this->criar($table, $values);
+
+        return $table;
     }
 }
