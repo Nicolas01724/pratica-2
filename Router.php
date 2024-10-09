@@ -1,6 +1,4 @@
 <?php
-define("VIEW_PATH", "");
-
 class Router {
     public static function GET($path, $handle) {
         $uri = $_SERVER['REQUEST_URI'];
