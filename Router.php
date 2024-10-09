@@ -5,7 +5,7 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         
         if ($path === $uri && $method === 'GET') {
-            include VIEW_PATH . "$handle.php";
+            include ROOT_PATH . CONSTROLLER_PATH . "/$handle.php";
         }
     }
 
@@ -14,7 +14,7 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         
         if ($path === $uri && $method === 'POST') {
-            include VIEW_PATH . "$handle.php";
+            include ROOT_PATH . CONSTROLLER_PATH . "/$handle.php";
         }
     }
 
@@ -23,7 +23,7 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         
         if ($path === $uri && $method === 'DELETE') {
-            include VIEW_PATH . "$handle.php";
+            include ROOT_PATH . CONSTROLLER_PATH . "/$handle.php";
         }
     }
 
@@ -32,7 +32,7 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         
         if ($path === $uri && $method === 'PUT') {
-            include VIEW_PATH . "$handle.php";
+            include ROOT_PATH . CONSTROLLER_PATH . "/$handle.php";
         }
     }
 }
