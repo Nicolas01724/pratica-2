@@ -8,7 +8,13 @@ class Escola extends Database {
 
     public function adicionar(array $values): bool | string {
         $table = $this->table;
+        
+        try {
+            $this->criar($table, $values);
+            return false;
+        } catch (Exception $e) {
+            return true;
+        }
 
-        return $table;
     }
 }
