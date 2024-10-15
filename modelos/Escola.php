@@ -11,9 +11,9 @@ class Escola extends Database {
         
         try { // 
             $this->criar($table, $values); // o criar puxa a função do database para adicionar valores dentro da tabela.
-            return false;
-        } catch (Exception $e) {
             return true;
+        } catch (Exception $e) {
+            return false;
         }
 
     }
@@ -25,6 +25,12 @@ class Escola extends Database {
             $dados[] = $row;
         }
         return $dados;
+    }
+
+    public function deletar($id){ //ver o que retornar
+        $table = $this->table;
+        $resultado = $this->query("DELETE * FROM $table WHERE $id=id;");//NÃO RECONHECE ID
+        $dados = array();
     }
 
 }
