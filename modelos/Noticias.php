@@ -21,19 +21,41 @@ class Noticia extends Database{
     return true;
   }
   
-  public function editar(string $table, array $valores, $id) {
+  public function editar(array $valores, int $id): void {
     
-    $kao = [];
+    $raw = [];
     
     foreach ($valor as $key => $value) {
-      array_push($kao, "$key = $value"); 
+      array_push($raw, "$key = '$value'"); 
     }
 
-    $editar_valores = implode(", ", $kao);
+    $editar_valores = implode(", ", $raw);
 
-    $raw = "UPDATE $this->table SET $editar_valores WHERE id = $id"
+    $query = "UPDATE $this->table SET $editar_valores WHERE id = $id";
 
-    $this->
+    $this->query($query);
   }
+
+  public function deletar(int $id): void {
+    $query = "DELETE FROM $this->table WHERE id = $id";
+
+    $this->query($query);
+  }
+
+  public function visualizar_noticia(array $informacoes, int $id) {
+
+    implode(", " $informacoes);
+
+    $query = "SELECT $informacoes, administrador.nome
+    FROM $this->table
+    INNER JOIN administrador
+    ON administrador.id = id_administrador
+    WHERE noticia.id = $id";
+
+    $dados = $this->query($query);
+    return $dados->fetch_assoc();
+  }
+
+
 }
 

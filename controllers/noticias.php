@@ -56,6 +56,42 @@ class Noticia_controller extends Controller {
 
     echo "Sucesso 😁";
   }
+
+  public function GET() {
+    $informacoes = ['titulo','conteudo','criado_em','url_imagem']
+    if (!assert_array_keys($informacoes, $_GET) || !assert_array_keys('id', $_GET)){
+      header('Status: 500 Internal Server Error');
+      die();
+    }
+
+    global $noticias;
+
+    $noticias->visualizar_noticia($informacoes, $_GET['id']);
+
+  }
+
+  public function DELETE() {
+
+    if (!assert_array_keys('id', $_DELETE)) {
+      header('Status: 500 Internal Server Error');
+      die();
+    }
+
+
+    global $noticias;
+    $noticias->deletar($_DELETE['id']);
+  }
+
+  public function PUT() {
+    global $noticias;
+
+    if (!assert_array_keys(['titulo','conteudo','criado_em','url_imagem'], $_PUT)){
+      header('Status: 500 Internal Server Error');
+      die();
+    }
+
+    $noticias->editar($_PUT);
+  }
   
 }
 
