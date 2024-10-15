@@ -2,7 +2,10 @@
 
 require_once "config.php";
 
-// Router::use('/', 'escola');
+require_once ROOT_PATH.CONTROLLER_PATH. "/escola.php";
+$escola_controller = new Escola_controller();
+Router::use("/escola", $escola_controller);
+
 
 // criar uma instancia
 
