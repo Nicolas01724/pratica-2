@@ -9,7 +9,7 @@ $escola = new Escola();
 
 class Escola_controller extends Controller {
 
-    public function POST() {
+    public function POST() {}
     
 }
 // if (assert_array_keys(["nome", "cidade", "bairro", "rua", "numero_escola"], $_POST)) {

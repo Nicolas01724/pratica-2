@@ -1,5 +1,5 @@
 <?php
-require_once(ROOT_PATH.MODEL_PATH."Noticias.php");
+require_once(ROOT_PATH.MODEL_PATH."\Noticias.php");
 foreach ($_POST as $key => $value) {
   $name = "_$key";
   global $$name;
