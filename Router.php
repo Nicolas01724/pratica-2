@@ -35,4 +35,29 @@ class Router {
             include ROOT_PATH . CONSTROLLER_PATH . "/$handle.php";
         }
     }
+
+    public static function use(string $path, Controller $controller) {
+        $uri = $_SERVER['REQUEST_URI'];
+        $method = $_SERVER['REQUEST_METHOD'];
+
+        if ($path !== $uri) return;
+
+        switch ($method) {
+            case 'GET':
+                $controller->GET();
+                break;
+            case 'DELETE':
+                $controller->DELETE();
+                break;
+            case 'PUT':
+                $controller->PUT();
+                break;
+            case 'POST':
+                $controller->POST();
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
 }

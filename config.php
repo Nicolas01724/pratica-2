@@ -11,6 +11,7 @@ define("DB_PASS", "root");
 define("DB_NAME", "EPTRAN_DS24M2");
 
 require_once "Router.php";
+require_once "Controller.php";
 require_once "Database.php";
 
 foreach ($_POST as $key => $value) {
