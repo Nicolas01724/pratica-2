@@ -15,3 +15,7 @@ $noticia_controller = new Noticia_controller();
 
 Router::use("/noticias", $noticia_controller );
 
+require_once ROOT_PATH.CONTROLLER_PATH. "/grafico.php";
+$grafico_controller = new Grafico_controller();
+Router::use("/grafico", $grafico_controller );
+
