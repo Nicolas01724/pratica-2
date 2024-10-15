@@ -10,8 +10,13 @@ $escola = new Escola();
 class Escola_controller extends Controller {
 
     public function POST() {
-    
-}
+        if (!assert_array_keys(["nome", "cidade", "bairro", "rua", "numero_escola"], $_POST)){
+            header('Status: 500 internal server error');
+            die();
+        }
+        
+    }
+}   
 // if (assert_array_keys(["nome", "cidade", "bairro", "rua", "numero_escola"], $_POST)) {
 //     $escola = new Escola();
 
