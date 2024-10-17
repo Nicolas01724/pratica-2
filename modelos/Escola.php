@@ -37,13 +37,8 @@ class Escola extends Database {
         }
     }
 
-    public function atualizar($id){
+    public function atualizar(array $values, string $id){
         $table = $this->table;
-        $result = $this->query("");//atualizar
-        $dados = array();
-        while ($row = $result->fetch_assoc()) {
-            $dados[] = $row;
-        }
-        return $dados;
+        $this->editar($table,  $values, $id);
     }
 }

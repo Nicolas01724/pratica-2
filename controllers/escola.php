@@ -46,15 +46,23 @@ class Escola_controller extends Controller {
     }
 
     public function PUT(){
-        $id = $_GET['id'];
+        $id = $_GET["id"];
         global $escola;
-        $escola->atualizar($id);
+        foreach ($_GET as $key => $value) {
+            $name = "_$key";
+            global $$name;
+            $$name = $value;
+        }
+
+
+
+        $escola->atualizar($_GET, $id);
         
     }
 
     public function GET(){
         global $escola;
-        $escola->listar();
+        print_r($escola->listar());
     }
 }   
 
