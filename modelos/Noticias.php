@@ -25,7 +25,7 @@ class Noticia extends Database{
     
     $raw = [];
     
-    foreach ($valor as $key => $value) {
+    foreach ($valores as $key => $value) {
       array_push($raw, "$key = '$value'"); 
     }
 
@@ -44,9 +44,9 @@ class Noticia extends Database{
 
   public function visualizar_noticia(array $informacoes, int $id) {
 
-    implode(", " $informacoes);
+    $valores = implode(", ", $informacoes);
 
-    $query = "SELECT $informacoes, administrador.nome
+    $query = "SELECT $valores, administrador.nome
     FROM $this->table
     INNER JOIN administrador
     ON administrador.id = id_administrador
