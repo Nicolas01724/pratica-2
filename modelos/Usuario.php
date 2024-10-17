@@ -34,4 +34,13 @@ class Usuario extends Database{
         }
         return false;
     }
+
+    function setar(array $values, string $id) {
+        try {
+            $this->editar($this->table, $values, $id);
+            return "sucesso";
+        } catch (Exception $e){
+            return "erro";
+        }
+    }
 }
