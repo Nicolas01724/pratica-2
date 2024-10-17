@@ -27,10 +27,23 @@ class Escola extends Database {
         return $dados;
     }
 
-    public function deletar($id){ //ver o que retornar
+    public function deletar($id){
         $table = $this->table;
-        $resultado = $this->query("DELETE * FROM $table WHERE $id=id;");//NÃO RECONHECE ID
-        $dados = array();
+        try {
+            $resultado = $this->query("DELETE FROM $table WHERE '$id'=id;");//vai tentar executar e caso de erro ele retorna que deu erro
+            return "sucesso";
+        } catch (Exception $e) {
+            return "erro";
+        }
     }
 
+    public function atualizar($id){
+        $table = $this->table;
+        $result = $this->query("");//atualizar
+        $dados = array();
+        while ($row = $result->fetch_assoc()) {
+            $dados[] = $row;
+        }
+        return $dados;
+    }
 }

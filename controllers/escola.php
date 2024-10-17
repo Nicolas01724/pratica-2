@@ -33,10 +33,28 @@ class Escola_controller extends Controller {
     }
     
     public function DELETE() {
-        $id = $_GET['id'];  
+        $id = $_GET['id'];
+        global $escola;
+        $sucesso = $escola->deletar($id);
+
+        if ($sucesso === "sucesso") {
+            echo "Sucesso ao deletar escola $id";
+        } else {
+            header('Status: 500 internal server error');
+            die("Erro ao deletar");
+        }
     }
 
     public function PUT(){
+        $id = $_GET['id'];
+        global $escola;
+        $escola->atualizar($id);
         
     }
+
+    public function GET(){
+        global $escola;
+        $escola->listar();
+    }
 }   
+
