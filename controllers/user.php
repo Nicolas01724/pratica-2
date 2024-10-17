@@ -1,6 +1,6 @@
 <?php 
 
-class User_controller extends Controller {
+class User_controller implements Controller {
     public function PUT () {
 
     }
@@ -8,4 +8,7 @@ class User_controller extends Controller {
     public function GET () {
         
     }
+
+    public function POST () {}
+    public function DELETE () {}
 }
