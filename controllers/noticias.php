@@ -9,7 +9,7 @@ $noticias = new Noticia();
 
 class Noticia_controller extends Controller {
   
-  public function POST() {
+  public function POST(): void {
     if (!assert_array_keys(['titulo','conteudo','id_administrador'], $_POST)){
       header('Status: 500 internal server error');
       die();
@@ -21,7 +21,7 @@ class Noticia_controller extends Controller {
       'image/jpeg', 
       'image/webp', 
       'image/jfif', 
-      'image/gif',
+      'image/gif'
     ];
     
     
@@ -60,9 +60,9 @@ class Noticia_controller extends Controller {
     echo "Sucesso 😁";
   }
 
-  public function GET() {
+  public function GET(): array|bool|null {
     $informacoes = ['titulo','conteudo','criado_em','url_imagem'];
-    if (!assert_array_keys($informacoes, $_GET) || !assert_array_keys('id', $_GET)){
+    if (!assert_array_keys($informacoes, $_GET) || !assert_array_keys(['id'], $_GET)){
       header('Status: 500 Internal Server Error');
       die();
     }
@@ -75,7 +75,7 @@ class Noticia_controller extends Controller {
 
   }
 
-  public function DELETE() {
+  public function DELETE():void {
     if (!assert_array_keys(['id'], $_GET)) {
       header('Status: 500 Internal Server Error');
       die('Id não esta presente! 😡');

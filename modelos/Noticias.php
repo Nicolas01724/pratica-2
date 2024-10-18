@@ -6,7 +6,7 @@ class Noticia extends Database{
     parent::__construct();
   }
   
-  public function adicionar(array $valores) {
+  public function adicionar(array $valores): bool {
     
     try {
       $this->criar($this->table, [
@@ -42,7 +42,7 @@ class Noticia extends Database{
     $this->query($query);
   }
 
-  public function visualizar_noticia(array $informacoes, int $id) {
+  public function visualizar_noticia(array $informacoes, int $id): array|bool|null {
 
     $valores = implode(", ", $informacoes);
 
