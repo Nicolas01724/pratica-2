@@ -29,7 +29,7 @@ CREATE TABLE usuario (
     data_nascimento DATE NOT NULL,
     telefone CHAR(13) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    eh_ativo BIT NOT NULL DEFAULT 1,
+    eh_ativo BINARY NOT NULL DEFAULT 1,
     id_escola INT NOT NULL,
     FOREIGN KEY (id_escola) REFERENCES escola (id)
 );

@@ -35,12 +35,24 @@ class Usuario extends Database{
         return false;
     }
 
-    function setar(array $values, string $id) {
+    function setar(array $values, int $id) {
         try {
             $this->editar($this->table, $values, $id);
             return "sucesso";
         } catch (Exception $e){
+            print_r( $e->getMessage() );
             return "erro";
         }
+    }
+
+    function visualizar() {
+        $table = $this->table;
+
+        $resposta = $this->query("SELECT * FROM $table");
+        $data = [];
+        while ($row = $resposta->fetch_assoc()) {
+            $data[] = $row;
+        }
+        return $data;
     }
 }

@@ -43,7 +43,7 @@ class Usuario_controller extends Controller{
     }
 
     public function PUT(){
-        if (!assert_array_keys(['nome', 'email', 'senha', 'escolaridade', 'bairro', 'genero', 'data_nascimento', 'telefone', 'id_escola', 'id'], $_GET)){
+        if (!assert_array_keys(['nome', 'email', 'senha', 'escolaridade', 'cidade', 'bairro', 'genero', 'data_nascimento', 'telefone', 'id_escola', 'id'], $_GET)){
             header('HTTP/1.1 400 Bad Request');
             die("Falta dados!");  
         }
@@ -75,4 +75,28 @@ class Usuario_controller extends Controller{
             die("Usuario não encontrado!");
         }
     } 
+
+    public function DELETE() {
+        if (!assert_array_keys(['id'], $_GET)){
+            header('HTTP/1.1 400 Bad Request');
+            die("Falta dados!");  
+        }
+        
+        $usuario = new Usuario();
+
+        $sucesso = $usuario->setar(['eh_ativo' => 0], $_GET["id"]);
+
+        if ($sucesso === "sucesso") {
+            echo "sucesso ao editar usuario 😁";
+        } else {
+            header('HTTP/1.1 404 Not Found');
+            die("Usuario não encontrado!");
+        }
+    }
+
+    public function GET() {
+        $usuario = new Usuario();
+        $sucesso = $usuario->visualizar();
+        print_r($sucesso);
+    }
 }
