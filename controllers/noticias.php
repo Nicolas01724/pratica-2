@@ -47,7 +47,7 @@ class Noticia_controller extends Controller {
     }
 
     global $noticias;
-
+                                                  
 
     $sucesso = $noticias->adicionar($_POST);
 
