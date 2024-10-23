@@ -12,7 +12,7 @@ class Noticia extends Database{
       $this->criar($this->table, [
         'titulo'=> $valores["titulo"],
         'conteudo'=> $valores["conteudo"],
-        'url_imagem'=> $valores["url_imagem"],
+        'codigo_imagem'=> $valores["codigo_imagem"],
         'id_administrador'=> $valores["id_administrador"],
       ]);
     } catch (Exception $e) {

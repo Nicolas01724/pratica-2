@@ -48,7 +48,6 @@ class Noticia_controller extends Controller {
 
     global $noticias;
 
-    $_POST["url_imagem"] = 
 
     $sucesso = $noticias->adicionar($_POST);
 
@@ -61,7 +60,7 @@ class Noticia_controller extends Controller {
   }
 
   public function GET(): array|bool|null {
-    $informacoes = ['titulo','conteudo','criado_em','url_imagem'];
+    $informacoes = ['titulo','conteudo','criado_em','codigo_imagem'];
     if (!assert_array_keys($informacoes, $_GET) || !assert_array_keys(['id'], $_GET)){
       header('Status: 500 Internal Server Error');
       die();
@@ -78,14 +77,14 @@ class Noticia_controller extends Controller {
   public function DELETE():void {
     if (!assert_array_keys(['id'], $_GET)) {
       header('Status: 500 Internal Server Error');
-      die('Id não esta presente! 😡');
+      die('Id não esta presente! 🤔');
     }
 
     $id = $_GET['id'];
 
     global $noticias;
 
-    $imagem = $noticias->visualizar_noticia(["url_imagem"], $id);
+    $imagem = $noticias->visualizar_noticia(["codigo_imagem"], $id);
     $noticias->deletar($id);
     
     if (file_exists($imagem)) {
