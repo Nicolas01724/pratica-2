@@ -542,7 +542,25 @@ class Memoria_controller implements Controller {
             $minute += 1;
         }
 
-        $memoria->insertTime($hour, $minute, $second);
+        $response = $memoria->selectUsers();
+
+        $is_true = false;
+
+        for ($i = 0; $i < count($response); $i++) {
+            $oi = $response[$i];
+            if ($oi['id'] == 1) {
+                $memoria->insertTime($hour, $minute, $second);
+                $is_true = true;
+                break;
+            } else {
+                $is_true = false;
+            }
+        }
+
+        if ($is_true == false) {
+            $query = "UPDATE jogo_memoria SET ultimo_tempo = '$hour:$minute:$second' WHERE id_usuario = 1;";
+        }
+
 
     }
     public function DELETE () {}

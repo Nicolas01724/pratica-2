@@ -8,8 +8,10 @@ class Memoria extends Database {
     public function insertTime($hours, $minutes, $seconds) {
         $query = "INSERT INTO jogo_memoria (ultimo_tempo, id_usuario)
         VALUES  ('$hours:$minutes:$seconds', 1);";
+        
 
         $this->query($query);
+
 
         $query = "UPDATE jogo_memoria jm1
         LEFT JOIN jogo_memoria jm2
@@ -19,6 +21,21 @@ class Memoria extends Database {
         WHERE jm1.id_usuario = 1;";
 
         $this->query($query);
+    }
+
+    public function selectUsers() {
+        $query = "Select * from jogo_memoria;";
+
+        $response = $this->query($query);
+
+        $data = array();
+
+        while ($row = $response->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+
     }
 
 
