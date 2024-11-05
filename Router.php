@@ -60,4 +60,13 @@ class Router {
                 break;
         }
     }
+
+    public static function privado() {
+        if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
+            echo $_SESSION["login"] ." - ". $_SESSION["senha"];
+        } else {
+            echo "Faça o seu login! 😒";
+        }
+        die();
+    }
 }

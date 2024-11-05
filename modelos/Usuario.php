@@ -22,6 +22,7 @@ class Usuario extends Database{
                 'id_escola' => $valores['id_escola'],
             ]);
         }catch(Exception $e){
+            echo ''.$e->getMessage().'';
             return false;
         }
         return true;

@@ -23,7 +23,7 @@ class Usuario_controller extends Controller{
         $sucesso = $usuario->adicionar([
             "nome" => $_nome,
             "email" => $_email,
-            "senha" => password_hash($_senha, PASSWORD_DEFAULT),
+            "senha" => password_hash($_senha, PASSWORD_BCRYPT),
             "escolaridade" => $_escolaridade,
             "cidade" => $_cidade,
             "bairro" => $_bairro,
