@@ -12,6 +12,18 @@ class Database {
     public function query(string $query): mysqli_result|bool {
         return $this->conn->query($query); //precisa fazer uma variavel para evitar injection sanitaze
     }
+    public function editar(string $table, array $values, string $id): void {
+        $query = "UPDATE $table SET ";
+
+        foreach ($values as $nome => $valor) {
+            $query .= " $nome = '$valor',";
+        }
+
+        $query = substr($query, 0, -1);
+        $query .= " WHERE id = $id;";
+
+        $this->query($query); // Manda para o banco de dados
+    }
     public function criar(string $table, array $values): void { 
         $campos = array_keys($values); // cria um array dos campos, esses campos são os campos das tabelas
         $valores = array_values($values); // coloca os valores da tabela dentro de valores
