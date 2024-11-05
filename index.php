@@ -29,4 +29,7 @@ require_once ROOT_PATH.CONTROLLER_PATH. "/login.php";
 $login_controller = new Login_controller();
 Router::use("/login", $login_controller);
 
+require_once ROOT_PATH.CONTROLLER_PATH. "/memoria.php";
+Router::use("/jogodamemoria", new Memoria_controller() );
 // Router::privado();
+
