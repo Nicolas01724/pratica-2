@@ -17,6 +17,10 @@ require_once ROOT_PATH . CONTROLLER_PATH. "/noticias.php";
 $noticia_controller = new Noticia_controller();
 Router::use("/noticias", $noticia_controller );
 
+require_once ROOT_PATH.CONTROLLER_PATH. "/grafico.php";
+$grafico_controller = new Grafico_controller();
+Router::use("/grafico", $grafico_controller );
+
 require_once ROOT_PATH.CONTROLLER_PATH. "/usuario.php";
 $usuario_controller = new Usuario_controller();
 Router::use("/usuario" , $usuario_controller);
