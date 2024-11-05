@@ -21,7 +21,7 @@ class Noticia extends Database{
     return true;
   }
   
-  public function editar(array $valores, int $id): void {
+  public function modificar(array $valores, int $id): void {
     
     $raw = [];
     

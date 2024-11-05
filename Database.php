@@ -35,19 +35,6 @@ class Database {
 
         $this->query($query); // vai mandar pro banco de dados chamando a função
     }
-    
-    public function editar(string $table, array $values, string $id): void {
-        $query = "UPDATE $table SET ";
-
-        foreach ($values as $nome => $valor) {
-            $query .= " $nome = '$valor',";
-        }
-
-        $query = substr($query, 0, -1);
-        $query .= " WHERE id = $id;";
-
-        $this->query($query); // Manda para o banco de dados
-    }
 
     public function visualizar_um(string $table, array $campos, int $id ):array|bool|null  { // Paula: visualização dos dados do banco
         $campos = implode(", ", $campos);

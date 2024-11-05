@@ -3,7 +3,7 @@ require_once ROOT_PATH . MODEL_PATH . "/Escola.php";
 $escola = new Escola();
 
 
-class Escola_controller extends Controller {
+class Escola_controller implements Controller {
     
     public function POST() {
         if (!assert_array_keys(["nome", "cidade", "bairro", "rua", "numero_escola"], $_POST)){
