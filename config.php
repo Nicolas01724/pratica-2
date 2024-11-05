@@ -4,7 +4,7 @@ declare(strict_types = 1);
 define("ROOT_PATH", __DIR__);
 define("MODEL_PATH", "\modelos");
 define("VIEW_PATH", "\views");
-define("CONSTROLLER_PATH", "\controllers");
+define("CONTROLLER_PATH", "\controllers");
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "root");

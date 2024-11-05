@@ -1,11 +1,11 @@
 <?php
 
 class Controller {
-    static function GET() {}
+    public function GET() {}
 
-    static function POST() {}
+    public function POST() {}
 
-    static function PUT() {}
+    public function PUT() {}
 
-    static function DELETE() {}
+    public function DELETE() {}
 }
