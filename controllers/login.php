@@ -4,7 +4,7 @@ require_once ROOT_PATH . MODEL_PATH . "/Login.php";
 
 
 
-class Login_controller extends Controller{
+class Login_controller implements Controller{
     public function POST(): void {
         $login = new Login();
 
@@ -38,4 +38,6 @@ class Login_controller extends Controller{
         unset($_SESSION["login"]);
         unset($_SESSION["senha"]);
     }
+    public function PUT() {}
+    public function GET() {}
 }

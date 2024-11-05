@@ -7,8 +7,8 @@
 
     session_start();
 
-    class Quiz_controller extends Controller{
-        static function GET(){
+    class Quiz_controller implements Controller{
+        public function GET(){
             global $quiz;
 
             if (!assert_array_keys(['id', 'r'], $_GET)) {
@@ -37,6 +37,10 @@
 
             <?php
         }
+
+        public function POST(){}
+        public function PUT(){}
+        public function DELETE(){}
     }
 
     function get_quiz($id){

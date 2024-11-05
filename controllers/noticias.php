@@ -7,8 +7,8 @@ foreach ($_POST as $key => $value) {
 }
 $noticias = new Noticia();
 
-class Noticia_controller extends Controller {
-  
+class Noticia_controller implements Controller {
+  public function PUT() {}
   public function POST(): void {
     if (!assert_array_keys(['titulo','conteudo','id_administrador'], $_POST)){
       header('Status: 500 internal server error');

@@ -1,7 +1,7 @@
 <?php
 require_once(ROOT_PATH.MODEL_PATH."\Usuario.php");
 
-class Usuario_controller extends Controller{
+class Usuario_controller implements Controller{
     public function POST(){
         if(!assert_array_keys(['nome','email','senha','escolaridade','cidade','bairro','genero','data_nascimento','telefone','id_escola'], $_POST)){
             header('HTTP/1.1 400 Bad Request');
