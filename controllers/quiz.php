@@ -40,27 +40,14 @@
                 $index++;
             }
 
-            include ROOT_PATH . VIEW_PATH . '\quiz.php';
-
+            include ROOT_PATH . VIEW_PATH . '\quiz\questao.php';
         }
+
         public function PUT(){}
         public function DELETE(){}
-    }
-
-    function get_quiz($id){
-        global $quiz;
-
-        $pergunta_fetch = $quiz->query("SELECT * FROM pergunta_quiz WHERE id = $id");
-        if (is_bool($pergunta_fetch)) return;
-
-        $pergunta = $pergunta_fetch->fetch_assoc();
-        $pergunta_id = $pergunta["id"];
-
-        $alternativas_fetch = $quiz->query("SELECT * from alternativa_quiz WHERE id_pergunta = '$pergunta_id'");
-        $alternativas = [];
-        while ($row = $alternativas_fetch->fetch_assoc()) {
-            $alternativas[] = $row;
+        
+        public function proximo(){
+            $proxima_questa = 1;
+            include ROOT_PATH . VIEW_PATH . '\quiz\proximo.php';
         }
-
-        return [$pergunta, $alternativas];
     }
