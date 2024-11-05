@@ -9,7 +9,7 @@ $noticias = new Noticia();
 
 class Noticia_controller extends Controller {
   
-  public function POST() {
+  public function POST(): void {
     if (!assert_array_keys(['titulo','conteudo','id_administrador'], $_POST)){
       header('Status: 500 internal server error');
       die();
@@ -21,7 +21,7 @@ class Noticia_controller extends Controller {
       'image/jpeg', 
       'image/webp', 
       'image/jfif', 
-      'image/gif',
+      'image/gif'
     ];
     
     
@@ -36,7 +36,8 @@ class Noticia_controller extends Controller {
       die();        
     };
     $nome = time().$arquivo['name'];
-    $caminho = ROOT_PATH.'/uploads/'.$nome;
+    $caminho = IMG_PATH . "/" . $nome;
+
 
     $sucesso = move_uploaded_file($arquivo['tmp_name'],$caminho);
     
@@ -46,6 +47,7 @@ class Noticia_controller extends Controller {
     }
 
     global $noticias;
+                                                  
 
     $sucesso = $noticias->adicionar($_POST);
 
@@ -55,6 +57,45 @@ class Noticia_controller extends Controller {
     }
 
     echo "Sucesso 😁";
+  }
+
+  public function GET(): array|bool|null {
+    $informacoes = ['titulo','conteudo','criado_em','codigo_imagem'];
+    if (!assert_array_keys($informacoes, $_GET) || !assert_array_keys(['id'], $_GET)){
+      header('Status: 500 Internal Server Error');
+      die();
+    }
+
+    global $noticias;
+
+    $resposta = $noticias->visualizar_noticia($informacoes, $_GET['id']);
+
+    return $resposta;
+
+  }
+
+  public function DELETE():void {
+    if (!assert_array_keys(['id'], $_GET)) {
+      header('Status: 500 Internal Server Error');
+      die('Id não esta presente! 🤔');
+    }
+
+    $id = $_GET['id'];
+
+    global $noticias;
+
+    $imagem = $noticias->visualizar_noticia(["codigo_imagem"], $id);
+    $noticias->deletar($id);
+    
+    if (file_exists($imagem)) {
+      if (unlink($imagem)) {
+        echo "A imagem foi excluido com sucesso!";
+      } else {
+        echo "Ocorreu um erro a excluir a imagem!";
+      }
+    } else {
+      echo "A imagem não existe!";
+    }
   }
   
 }

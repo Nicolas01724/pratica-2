@@ -1,7 +1,7 @@
 <?php
 class Database {
     private ?mysqli $conn;
-    public function __construct() {
+     public function __construct() { // Paula: faz a conexão com o banco
         try {
             $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         } catch(Exception $e) {
@@ -37,7 +37,7 @@ class Database {
         $this->query($query); // Manda para o banco de dados
     }
 
-    public function visualizar_um(string $table, array $campos, int $id ):array|bool|null  {
+    public function visualizar_um(string $table, array $campos, int $id ):array|bool|null  { // Paula: visualização dos dados do banco
         $campos = implode(", ", $campos);
         
         $query = "SELECT $campos FROM $table WHERE '$id' = id" ;
