@@ -29,4 +29,4 @@ require_once ROOT_PATH.CONTROLLER_PATH. "/login.php";
 $login_controller = new Login_controller();
 Router::use("/login", $login_controller);
 
-Router::privado();
+// Router::privado();

@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 define("ROOT_PATH", __DIR__);
 define("MODEL_PATH", "\modelos");
-define("VIEW_PATH", "\views");
+define("VIEW_PATH", '\views');
 define("CONTROLLER_PATH", "\controllers");
 define("IMG_PATH", "\uploads");
 define("IMG_ROUTER", "\uploads");
