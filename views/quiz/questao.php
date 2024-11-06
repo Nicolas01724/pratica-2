@@ -33,7 +33,7 @@
         <?php foreach ($respostas as $pergunta): ?>
             <button
                 class="botao"
-                hx-get="/quiz/responder?id=<?= $pergunta_que_vai_voltar['id'] ?>&resposta=<?= $pergunta["id"] ?>"
+                hx-get="/quiz/responder?id=<?= $pergunta_que_vai_voltar['id'] ?>&resposta=<?= $pergunta["id"] ?>&questas=<?= substr(implode(",",$questas), 1);?>"
                 hx-trigger="click"
                 hx-target="#iniciar_quiz"
                 hx-swap="innerHTML"
@@ -51,8 +51,11 @@
     </div>
 
     <script>
-        const $containerRespostas = document.querySelector(".respostas")
-        const $imagem = document.querySelector(".container_imagem")
+        clearInterval(a)
+        $containerRespostas = document.querySelector(".respostas")
+        $imagem = document.querySelector(".container_imagem")
         iniciarJogo()
+
+        a = setInterval(() => console.log('oi'), 1000)
     </script>
 </div>

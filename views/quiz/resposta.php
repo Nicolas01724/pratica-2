@@ -10,7 +10,7 @@
                 <div class="caixa_texto">
                     <div class="centraliza_texto"> 
                         <div id="container_pergunta">
-                        <p id="pergunta"><?= $pergunta['pergunta'] ?></p>
+                        <p id="pergunta"><?= $pergunta['texto_pergunta'] ?></p>
                         </div>
                     </div>
                 </div>
@@ -29,14 +29,14 @@
         </div>
     </div>
     <div class="respostas">
-        <?php foreach ($respostas as $resposta): ?>
-            <button class="botao <?php if ($resposta["tipo"] === 'errado') { echo 'botao_incorreto'; } elseif ($resposta["tipo"] === 'correto') { echo 'botao_correto'; } ?>">
+        <?php foreach ($respostas as $pergunta): ?>
+            <button class="botao <?php if ($pergunta["tipo"] === 'errado') { echo 'botao_incorreto'; } elseif ($pergunta["tipo"] === 'correto') { echo 'botao_correto'; } ?>">
                 <div class="centralizar_elemento">
                     <div class="circulo">
-                        <p class="alternativa"> <?= $resposta["letra"] ?> </p>
+                        <p class="alternativa"> <?= $pergunta["letra"] ?> </p>
                     </div>
                     <div class="resposta">
-                        <p><?= $resposta["texto_alternativa"] ?></p>
+                        <p><?= $pergunta["texto_alternativa"] ?></p>
                     </div>
                 </div>
             </button>
@@ -44,4 +44,8 @@
     </div>
 </div>
 
-<div hx-get="/quiz/botao_proximo" hx-trigger="load" hx-swap="outerHTML"></div>
+<script>
+    pararTempo()
+</script>
+
+<div hx-get="/quiz/botao_proximo?questas=<?= substr(implode(",",$questas), 1);?>" hx-trigger="load" hx-swap="outerHTML"></div>
