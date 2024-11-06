@@ -38,4 +38,16 @@ class Quiz extends Database{
         }
         return $data;
     }
+
+    public function pegar_uma_pergunta(string|int $id) {
+        $table = $this->table_pergunta;
+        $resultado = $this->visualizar_um($table, ["id", "texto_pergunta", "codigo_imagem", "id_quiz"], $id);
+        return $resultado;
+    }
+
+    public function pegar_uma_resposta(string|int $id) {
+        $table = $this->table_alternativa;
+        $resultado = $this->visualizar_um($table, ["id", "texto_alternativa", "eh_correta", "id_pergunta"], $id);
+        return $resultado;
+    }
 }

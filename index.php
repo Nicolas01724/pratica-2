@@ -6,6 +6,9 @@ session_start();
 require_once ROOT_PATH . CONTROLLER_PATH . "\quiz.php";
 $quiz_controller = new Quiz_controller();
 Router::use('/', $quiz_controller);
+Router::GET('/quiz/botao_proximo', fn () => $quiz_controller->proximo());
+Router::GET('/quiz/gerar', fn () => $quiz_controller->gerarQuiz());
+Router::GET('/quiz/responder', fn () => $quiz_controller->responder());
 
 // Router::POST('/', 'escola');
 
@@ -31,5 +34,6 @@ Router::use("/login", $login_controller);
 
 require_once ROOT_PATH.CONTROLLER_PATH. "/memoria.php";
 Router::use("/jogodamemoria", new Memoria_controller() );
+
 // Router::privado();
 

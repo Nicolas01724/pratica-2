@@ -20,7 +20,7 @@
             </div>
             <div id="container">
                 <div id="container_foca">
-                    <img id="foca" src="../../../imagens/foca.png">
+                    <img id="foca" src="/public/images/foca.png">
                 </div>
                 <div class="container_imagem">
                     <img class="imagem" src="">
@@ -31,7 +31,13 @@
 
     <div class="respostas">
         <?php foreach ($respostas as $pergunta): ?>
-            <button class="botao" hx-get="/quiz/questao" hx-trigger="click" hx-target="#iniciar_quiz" hx-swap="innerHTML">
+            <button
+                class="botao"
+                hx-get="/quiz/responder?id=<?= $pergunta_que_vai_voltar['id'] ?>&resposta=<?= $pergunta["id"] ?>"
+                hx-trigger="click"
+                hx-target="#iniciar_quiz"
+                hx-swap="innerHTML"
+            >
                 <div class="centralizar_elemento">
                     <div class="circulo">
                         <p class="alternativa"> <?= $pergunta["letra"] ?> </p>
