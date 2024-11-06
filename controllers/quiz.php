@@ -92,6 +92,7 @@ class Quiz_controller implements Controller{
             $$name = $value;
         }
 
+<<<<<<< HEAD
         $_questas = explode(",", $_questas);
         
         $pergunta = $quiz->pegar_uma_pergunta($_id);
@@ -106,6 +107,14 @@ class Quiz_controller implements Controller{
                     $respostas[$index]['tipo'] = 'correto';
                 } else {
                     $respostas[$index]['tipo'] = 'errado';
+=======
+            $respostas = $quiz->listar_alternativas($_id);
+            $resposta = $quiz->pegar_uma_resposta($_resposta);
+
+            foreach ($respostas as $resposta_unica) {
+                if ($resposta_unica['id'] == $resposta['id']) {
+                    if ($resposta_unica['eh_certo']);
+>>>>>>> dba5b7a9b9f66c31bbb1718e8da2da50939ff147
                 }
             }
             $index++;
