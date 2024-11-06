@@ -76,7 +76,7 @@
 
             foreach ($respostas as $resposta_unica) {
                 if ($resposta_unica['id'] == $resposta['id']) {
-                    if ($resposta_unica['eh_certo'])
+                    if ($resposta_unica['eh_certo']);
                 }
             }
 
