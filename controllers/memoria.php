@@ -109,7 +109,7 @@ class Memoria_controller implements Controller {
             background-color: white;
         }
         .costa{
-            background-image: url(../../imagens/PontoInterrogação);
+            background-image: url(../imagens/PontoInterrogação.png);
             background-color: white;
             backface-visibility: hidden;
         }
@@ -481,7 +481,7 @@ class Memoria_controller implements Controller {
             const front = createElement('div', 'rosto frente');
             const back = createElement('div', 'rosto costa');
             
-            front.style.backgroundImage = `url('http://127.0.0.1:5500/codigo-novo/Eptran-DS-24-M2-main/imagens/Personagens/${personagens}.png')`;
+            front.style.backgroundImage = `url('../imagens/Personagens/${personagens}.png')`;
 
             card.appendChild(front);
             card.appendChild(back);
@@ -542,23 +542,10 @@ class Memoria_controller implements Controller {
             $minute += 1;
         }
 
-        $response = $memoria->selectUsers();
-
-        $is_true = false;
-
-        for ($i = 0; $i < count($response); $i++) {
-            $oi = $response[$i];
-            if ($oi['id'] == 1) {
-                $memoria->insertTime($hour, $minute, $second);
-                $is_true = true;
-                break;
-            } else {
-                $is_true = false;
-            }
-        }
-
-        if ($is_true == false) {
-            $query = "UPDATE jogo_memoria SET ultimo_tempo = '$hour:$minute:$second' WHERE id_usuario = 1;";
+        if (true){
+            $memoria->updateTime($hour, $minute, $second);
+        } else {
+            $memoria->insertTime($hour, $minute, $second);
         }
 
 

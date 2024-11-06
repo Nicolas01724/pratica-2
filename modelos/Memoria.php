@@ -6,24 +6,13 @@ require_once "Database.php";
 class Memoria extends Database {
 
     public function insertTime($hours, $minutes, $seconds) {
-        $query = "INSERT INTO jogo_memoria (ultimo_tempo, id_usuario)
-        VALUES  ('$hours:$minutes:$seconds', 1);";
-        
-
-        $this->query($query);
-
-
-        $query = "UPDATE jogo_memoria jm1
-        LEFT JOIN jogo_memoria jm2
-        ON jm1.id = jm2.id + 1
-        SET jm1.ultimo_tempo = jm1.ultimo_tempo, 
-        jm1.melhor_tempo = verificar_tempo(jm1.ultimo_tempo, jm2.melhor_tempo)
-        WHERE jm1.id_usuario = 1;";
+        $query = "INSERT INTO jogo_memoria (ultimo_tempo, melhor_tempo, id_usuario)
+        VALUES  ('$hours:$minutes:$seconds', '$hours:$minutes:$seconds', 2);";
 
         $this->query($query);
     }
 
-    public function selectUsers() {
+    public function selectUsers(): array {
         $query = "Select * from jogo_memoria;";
 
         $response = $this->query($query);
@@ -38,5 +27,15 @@ class Memoria extends Database {
 
     }
 
+    public function updateTime($hours, $minutes, $seconds) {
+        $query = "UPDATE jogo_memoria SET ultimo_tempo = '$hours:$minutes:$seconds' WHERE id_usuario = 2;";
 
+        $this->query($query);
+
+        $query = "UPDATE jogo_memoria SET melhor_tempo = verificar_tempo(ultimo_tempo, melhor_tempo)
+        WHERE id_usuario = 2;";
+
+        $this->query($query);
+    
+    }
 }
