@@ -10,8 +10,7 @@ let $imagem = document.querySelector(".container_imagem")
 let a
 const acabou = document.querySelector(".acabou")
 
-$proximaPergunta.addEventListener("click", proximaPergunta)
-
+let questaoAtual = 0;
 
 function iniciarJogo(){
 //     renderizarBarra(0);
@@ -22,6 +21,14 @@ const pararTempo = () => {
     clearInterval(intervaloTempo)
 }
 
+function contarQuestoes(){
+    console.log("chamou a função")
+    console.log(questaoAtual)
+    questaoAtual++
+    if(questaoAtual === 10){
+        telaZerou()
+    }
+}
 /**
  * 
  * @param {number} value Valor da barra em porcentagem 
@@ -63,4 +70,47 @@ function temporizador(){
             clearInterval(intervaloTempo)  
         }
     }, 10)
+}
+
+function telaZerou(){
+    window.location.href = "/quiz/zerou?id=1&pontuacao=1";
+    zerarJogo()
+}
+
+function zerarJogo(){
+    const perguntasTotais = 10
+    const resultado = Math.floor(respostasCorretas * 100 / perguntasTotais)
+
+    let mensagem = ""
+
+    switch(true){
+        case(resultado >= 90):
+            mensagem = "Você é um mestre do trânsito!"
+            break
+        case(resultado >= 70):
+            mensagem = "Você sabe muito sobre o trânsito!"
+            break
+        case(resultado >= 50):
+            mensagem = "Você está indo no caminho certo!"
+            break
+        default:
+            mensagem = "Você precisa se aprofundar mais no asssunto!"
+    }
+
+    pontuacao = (pontuacao*1000)/30000
+    pontuacao = Math.round(pontuacao)
+
+    $textoPergunta.innerHTML = `Você acertou ${respostasCorretas} de ${perguntasTotais} questões!
+    <span>Resultado: ${mensagem} </span>
+    <span> Pontuação: ${pontuacao} </span>`
+
+    $botaoSair.classList.remove("hide")
+    $proximaPergunta.classList.add("hide")
+    $containerRespostas.classList.add("hide")
+    acabou.classList.remove("hide")
+    if(pontuacao >= 500){
+        acabou.innerHTML = "Muito bem!"
+    } else{
+        acabou.innerHTML = "Mais sorte da proxima vez!"
+    }
 }

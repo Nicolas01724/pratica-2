@@ -9,6 +9,7 @@ Router::use('/', $quiz_controller);
 Router::GET('/quiz/botao_proximo', fn () => $quiz_controller->proximo());
 Router::GET('/quiz/gerar', fn () => $quiz_controller->gerarQuiz());
 Router::GET('/quiz/responder', fn () => $quiz_controller->responder());
+Router::GET('/quiz/zerou', fn() => $quiz_controller->zerou());
 
 // Router::POST('/', 'escola');
 

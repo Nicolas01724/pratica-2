@@ -5,6 +5,7 @@ class Quiz extends Database{
 
     private $table_pergunta = "pergunta_quiz";
     private $table_alternativa = "alternativa_quiz";
+    private $table_ranking = "ranking";
     
     public function listar_perguntas(int $escolaridade): array{
         $table = $this->table_pergunta;
@@ -28,8 +29,7 @@ class Quiz extends Database{
         $resposta = $this->query(
             "SELECT *
             FROM $table
-            WHERE id_pergunta = '$question_id'
-            ORDER BY RAND();
+            WHERE id_pergunta = '$question_id';
         ");
         
         $data = [];
@@ -48,6 +48,15 @@ class Quiz extends Database{
     public function pegar_uma_resposta(string|int $id) {
         $table = $this->table_alternativa;
         $resultado = $this->visualizar_um($table, ["id", "texto_alternativa", "eh_correta", "id_pergunta"], $id);
+        return $resultado;
+    }
+
+    public function pegar_pontuacao(string|int $id) {
+        $table = $this->table_ranking;
+        $resultado = $this->query("SELECT * 
+        FROM $table 
+        INNER JOIN usuario 
+        WHERE id_usuario = '$id'");
         return $resultado;
     }
 }

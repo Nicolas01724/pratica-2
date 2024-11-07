@@ -18,7 +18,7 @@
 #borda_imagem{
     display: flex;
     justify-content: left;
-    background-image: url('../../imagens/imagem_fundo.jpg');
+    background-image: url('/public/images/imagem_fundo.jpg');
     background-size: cover;
     background-position: center;
     width: 90%;
