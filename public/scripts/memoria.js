@@ -5,6 +5,21 @@ const cronometo = document.querySelector('.tempo');
 
 let primeira_carta = '';
 let segunda_carta = '';
+async function debug(tempo) {
+    const formData = new FormData()
+    formData.append('tempo', segundos)
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id_usuario = urlParams.get('id');
+    formData.append('usuario', id_usuario)
+
+    const response = await fetch("/jogodamemoria", {
+        method: 'POST',
+        body: formData
+    })
+
+    console.log(await response.text())
+}
 
 ChecarFimJogo = async () => {
     const cartaDesabilitadas = document.querySelectorAll('.carta_preto_branco');
@@ -16,6 +31,11 @@ ChecarFimJogo = async () => {
         
         const formData = new FormData()
         formData.append('tempo', segundos)
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id_usuario = urlParams.get('id_usuario');
+        formData.append('usuario', id_usuario)
+
         const response = await fetch("/jogodamemoria", {
             method: 'POST',
             body: formData
