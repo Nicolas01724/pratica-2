@@ -7,7 +7,7 @@ class Memoria extends Database {
 
     public function insertTime($hours, $minutes, $seconds) {
         $query = "INSERT INTO jogo_memoria (ultimo_tempo, melhor_tempo, id_usuario)
-        VALUES  ('$hours:$minutes:$seconds', '$hours:$minutes:$seconds', 2);";
+        VALUES  ('$hours:$minutes:$seconds', '$hours:$minutes:$seconds', 1);";
 
         $this->query($query);
     }
@@ -28,12 +28,12 @@ class Memoria extends Database {
     }
 
     public function updateTime($hours, $minutes, $seconds) {
-        $query = "UPDATE jogo_memoria SET ultimo_tempo = '$hours:$minutes:$seconds' WHERE id_usuario = 2;";
+        $query = "UPDATE jogo_memoria SET ultimo_tempo = '$hours:$minutes:$seconds' WHERE id_usuario = 1;";
 
         $this->query($query);
 
         $query = "UPDATE jogo_memoria SET melhor_tempo = verificar_tempo(ultimo_tempo, melhor_tempo)
-        WHERE id_usuario = 2;";
+        WHERE id_usuario = 1;";
 
         $this->query($query);
     
