@@ -98,5 +98,9 @@ class Usuario_controller implements Controller{
         $usuario = new Usuario();
         $sucesso = $usuario->visualizar();
         print_r($sucesso);
+
+        // if ($resposta == 1){
+        //     $usuario
+        // }
     }
 }

@@ -23,12 +23,18 @@ class Memoria_controller implements Controller {
             $minute += 1;
         }
 
-        if (true){
-            $memoria->updateTime($hour, $minute, $second);
-        } else {
-            $memoria->insertTime($hour, $minute, $second);
-        }
+        print_r($_POST);
 
+        $time = sprintf('%02d:%02d:%02d', $hour, $minute, $second);
+
+        if (is_null($_POST['usuario']) || empty($_POST['usuario']) || $_POST['usuario'] == 'null') {
+            print_r("Nenhum usuario informado");
+            $memoria->insertOrUpdateTime($hour, $minute, $second);
+            return;
+        }
+        $usuario = $_POST['usuario'];   
+        $memoria->updateTime($hour, $minute, $second, $usuario);
+        return;
 
     }
     public function DELETE () {}
