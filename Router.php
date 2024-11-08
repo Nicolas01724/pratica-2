@@ -69,4 +69,18 @@ class Router {
         }
         die();
     }
+
+    public static function filtro(string $tipo) {
+        $tipos = [
+            "ensino_medio" => 3,
+            "fundamental_2" => 2,
+            "fundamental_1" => 1,
+        ];
+
+        if (!isset($_SESSION["escolaridade"])) die("Acesso negado!");
+
+        $tipo_usuario = $_SESSION["escolaridade"];
+
+        if (!($tipo_usuario >= $tipos[$tipo])) die("Acesso negado!"); 
+    }
 }
