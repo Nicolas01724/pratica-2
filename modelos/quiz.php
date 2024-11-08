@@ -6,6 +6,8 @@ class Quiz extends Database{
     private $table_pergunta = "pergunta_quiz";
     private $table_alternativa = "alternativa_quiz";
     private $table_ranking = "ranking";
+    private $table_quiz = "quiz";
+    private $table_usuario = "usuario";
     
     public function listar_perguntas(int $escolaridade): array{
         $table = $this->table_pergunta;
@@ -48,6 +50,29 @@ class Quiz extends Database{
     public function pegar_uma_resposta(string|int $id) {
         $table = $this->table_alternativa;
         $resultado = $this->visualizar_um($table, ["id", "texto_alternativa", "eh_correta", "id_pergunta"], $id);
+        return $resultado;
+    }
+
+    public function pegar_id_quiz(){
+        $table = $this->table_quiz;
+        $id_quiz = $this->query("SELECT id 
+        FROM $table");
+        return $id_quiz;
+    }
+
+    public function pegar_id_usuario(){
+        $table = $this->table_usuario;
+        $id_usuario = $this->query("SELECT id
+        FROM $table");
+        return $id_usuario;
+    }
+
+    public function inserir_ranking(){
+        $table = $this->table_ranking;
+        $resultado = $this->query("INSERT INTO $table 
+        (pontuacao, id_quiz, id_usuario)
+        VALUES
+        ($pontuacao, $id_quiz, $id_usuario)");
         return $resultado;
     }
 
