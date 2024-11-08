@@ -1,8 +1,4 @@
-<?php
 
-    
-
-?>
 
 <div id="borda_imagem">
         <div>
@@ -46,3 +42,13 @@
         </a>
     </div>
 </div>
+
+<script>
+    zerarJogo()
+</script>
+
+<?php
+
+    
+
+?>

@@ -95,12 +95,65 @@ class Usuario_controller implements Controller{
     }
 
     public function GET() {
-        $usuario = new Usuario();
+        $usuario = new Usuario(); 
         $sucesso = $usuario->visualizar();
         print_r($sucesso);
 
-        // if ($resposta == 1){
-        //     $usuario
+   
+        // public function acessoSerieInicial($_id){
+        //     $usuario = new Usuario();
+        //     $escolaridade = $usuario->validar($usuarioId);
+
+        //     if ($escolaridade === false){
+        //         header('403 Forbidden!');
+        //         die("Usuário não encontrado!")
+        //     }
+
+        //     if ($escolaridade == '1' || $escolaridade == '2' || $escolaridade == "2"){
+        //         echo "Bem vindo à Série inicial!";
+        //         $sucesso = $usuario->visualizar();
+        //         print_r($sucesso);
+        
+        //     } 
+        // }
+
+        // public function acessoSerieFinal(){
+        //     $usuario = new Usuario();
+        //     $escolaridade = $usuario->validar($usuarioId);
+
+        //     if ($escolaridade === false){
+        //         header('403 Forbidden!');
+        //         die("Usuário não encontrado!")
+        //     }
+
+        //     if ($escolaridade == '2'){
+        //         echo "Bem vindo à Série Final!";
+        //         $sucesso = $usuario->visualizar();
+        //         print_r($sucesso);
+
+        //     } elseif($escolaridade == '3'){
+        //         echo "Bem vindo à Série Final!";
+        //         $sucesso = $usuario->visualizar();
+        //         print_r($sucesso);
+        //     } 
+        // }
+
+        // public function acessoEnsinoMedio(){
+        //     $usuario = new Usuario();
+        //     $escolaridade = $usuario->validar($usuarioId);
+
+        //     if ($escolaridade === false){
+        //         header('403 Forbidden!');
+        //         die("Usuário não encontrado!")
+        //     }
+
+        //     if ($escolaridade == '3'){
+        //         $usuario = new Usuario();
+        //         $escolaridade = $usuario->validar($usuarioId);
+        //     } elseif($escolaridade == '2' || $escolaridade == '1'){
+        //         header('403 Forbidden!')
+        //         die('Apenas usuários do Ensino Médio podem acessar ...')
+        //     }
         // }
     }
 }

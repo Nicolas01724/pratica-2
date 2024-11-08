@@ -27,6 +27,7 @@ class Usuario extends Database{
         }
         return true;
     }
+    
     function selecionar_por_email ($email)  {
         $sql = "SELECT id FROM $this->table WHERE email = '$email'";
         $resposta = $this->query( $sql );
@@ -57,34 +58,24 @@ class Usuario extends Database{
         return $data;
     }
 
+<<<<<<< HEAD
+    // function validar() {
+    //     $resultado = $this->query("SELECT escolaridade FROM usuario WHERE id = $id;") // ver da onde vem esse id
+       
+    //     if ($resultado->num_rows > 0){
+    //         $row = $resposta->fetch_assoc()
+    //         return $row['escolaridade'];
+    //     }
+       
+    //     return false; // caso não encontre nenhum usuario
+=======
     function validar() {
         $resposta = $this->query("SELECT $escolaridade FROM usuario WHERE id = $id;"); // ver da onde vem esse id
         $categoria_um = 0;
         $categoria_dois = 0;
         $categoria_tres = 0;
+>>>>>>> a6663f92195148dc5921029e0ef4c54721501929
 
-    //     if (($resposta = "1")){
-
-    //         // $categoria_um = 1;
-    //         // $categoria_dois = 0;
-    //         // $categoria_tres = 0;
-    //         $resposta == 1;
-    //         return $resposta;
-    //     }
-    //     if ($resposta = "2"){
-    //         // $categoria_um = 1;
-    //         // $categoria_dois = 1;
-    //         // $categoria_tres = 0;
-    //         $resposta == 2;
-    //         return $resposta;
-    //     }
-    //     if ($resposta = "3"){
-    //     //     $categoria_um = 1;
-    //     //     $categoria_dois = 1;
-    //     //     $categoria_tres = 1;
-    //         $resposta == 3;
-    //         return $resposta;
-    //     }
     // }
     }
 }

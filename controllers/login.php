@@ -30,6 +30,7 @@ class Login_controller implements Controller{
 
         $_SESSION["login"] = $email;
         $_SESSION["senha"] = $senha;
+        $_SESSION["escolaridade"] = $escolaridade;
 
         echo "sucesso!";
     }
@@ -37,7 +38,9 @@ class Login_controller implements Controller{
     public function DELETE() {
         unset($_SESSION["login"]);
         unset($_SESSION["senha"]);
+        unset($_SESSION["escolaridade"]);
     }
+    
     public function PUT() {}
     public function GET() {}
 }
