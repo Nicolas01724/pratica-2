@@ -21,7 +21,7 @@ class Graficos extends Database {
     // SESSÃO POR ESCOLA 
 
     // visualizar usuários por escola.
-    public function visualizar_usuarios_escola(int $escola_id): array {
+    public function visualizar_usuarios_escola(int $escola_id): array {}}
         $query = "SELECT COUNT(usuario.id) AS 'Total', escola.nome AS 'Nome da escola', cidade.nome AS 'Cidade da escola', bairro.nome AS 'Bairro da escola' FROM usuario 
         INNER JOIN escola ON usuario.id_escola = escola.id INNER JOIN bairro ON escola.id_bairro = bairro.id INNER JOIN cidade ON bairro.id_cidade = cidade.id GROUP BY escola.nome, cidade.nome, bairro.nome;";
     
@@ -32,7 +32,7 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return $response;
+        return json_encode($response);
     }
 
 
@@ -48,7 +48,7 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return $response;
+        return json_encode($response);
     } 
 
         // SESSÃO POR ESCOLARIDADE
@@ -64,7 +64,7 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return $response;
+        return json_encode($response);
     }
 
     // visualizar usuarios por escolaridade na escola
@@ -88,7 +88,9 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return $response;
+        
+
+        return json_encode($response);
     }
     
     // visualizar usuarios por escolaridade e genero
@@ -102,7 +104,24 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return $response;
+        
+
+        return json_encode($response);
+
+    }
+
+    public function visualizar_usuarios_genero() {
+        $query = "SELECT genero AS 'Gênero', COUNT(usuario.id) AS 'Total' FROM usuario GROUP BY genero;";
+
+        $result = $this->query($query);
+
+        $data = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return json_encode($data);
     }
 
 }
