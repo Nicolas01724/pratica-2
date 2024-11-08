@@ -6,30 +6,36 @@ $grafico = new Graficos();
 
 class Grafico_controller implements Controller {
   public function GET() { // ver os dados, logo é necessário colocá-los dentro de uma escolha
-    if (!assert_array_keys(['id', 'metodo_um', 'metodo_dois'], array: $_GET)){
+    if (!assert_array_keys(['id','metodo_um', 'metodo_dois'], $_GET)){
       header('Status: 500 internal server error');
-      die();
+      die("Variaveis erradas!");
     } 
-
+    
     global $grafico;
   
-    $escolaridade = $_GET['escolaridade']; // DÚVIDA: como usamos os métodos em baixo, não são necessários esses 3, certo?
-    $bairro = $_GET['bairro'];
-    $cidade = $_GET['cidade'];
-    $genero = $_GET['genero'];
-    $id = $_GET['escola_id'];
+    // $escolaridade = $_GET['escolaridade']; // DÚVIDA: como usamos os métodos em baixo, não são necessários esses 3, certo?
+    // $bairro = $_GET['bairro'];
+    // $cidade = $_GET['cidade'];
+    // $genero = $_GET['genero'];
+    // $id = $_GET['escola_id'];
+    $id = $_GET['id'];
 
     $metodo_um = $_GET['metodo_um'];
     $metodo_dois = $_GET['metodo_dois'];
 
     $resposta = null;
     
+
     // Notas para FrontEnd: Mudar de acordo com o requisitado no
     if(($metodo_um == 'escola') && ($metodo_dois == null)) {
       //visualizar usuários por escola.
       $resposta = $grafico->visualizar_usuarios_escola($id); // DÚVIDA: Ta certo esse parâmetro? 
       return $resposta;
   
+    } else if(($metodo_um == 'genero') && ($metodo_dois == 'null')) {
+      $resposta = $grafico->visualizar_usuarios_genero();
+      echo($resposta);
+      return $resposta;
     } else if(($metodo_um == 'escola') && ($metodo_dois == 'genero') ){
       // visualizar usuaário por genero na escola.
       $resposta = $grafico->visualizar_usuarios_genero_escola( $id); // DÚVIDA: Ta certo esse parâmetro? 
