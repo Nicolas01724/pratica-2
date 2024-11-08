@@ -7,6 +7,12 @@ $quiz = new Quiz();
 
 class Quiz_controller implements Controller{
     public function POST() {
+        global $quiz;
+
+        $pontuacao = $_POST['pontuacao'];
+
+        $quiz->inserir_ranking($pontuacao);
+        return;
         
     }
     
@@ -136,9 +142,10 @@ class Quiz_controller implements Controller{
             $$name = $value;
         }
 
-
-        $dados = $quiz->inserir_ranking($id);
-        $pontuacao = $quiz->pegar_pontuacao($id);
+        $id_quiz = $quiz->pegar_id_quiz($_id);
+        $id_usuario = $quiz->pegar_id_usuario($_id);
+        $dados = $quiz->inserir_ranking($_id);
+        $pontuacao = $quiz->pegar_pontuacao($_id);
 
         include ROOT_PATH . VIEW_PATH . '\quiz\zerou.php';
     }

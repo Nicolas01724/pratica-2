@@ -73,10 +73,12 @@ function temporizador(){
 }
 
 function telaZerou(){
-    window.location.href = "/quiz/zerou?id=1&pontuacao=1";
+    window.location.href = "/quiz/zerou";
 }
 
-function zerarJogo(){
+async function zerarJogo(){
+
+
     const perguntasTotais = 10
     const resultado = Math.floor(respostasCorretas * 100 / perguntasTotais)
 
@@ -112,4 +114,16 @@ function zerarJogo(){
     } else{
         acabou.innerHTML = "Mais sorte da proxima vez!"
     }
+
+    const formData = new FormData()
+    formData.append('pontuacao', pontuacao)
+
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const id_usuario = urlParams.get('id');
+
+    const response = await fetch("/zerou", {
+        method: 'POST',
+        body: formData
+    })
+
 }

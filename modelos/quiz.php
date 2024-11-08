@@ -53,21 +53,27 @@ class Quiz extends Database{
         return $resultado;
     }
 
-    public function pegar_id_quiz(){
+    public function pegar_id_quiz($id){
         $table = $this->table_quiz;
         $id_quiz = $this->query("SELECT id 
-        FROM $table");
+        FROM $table
+        WHERE id = '$id'");
         return $id_quiz;
     }
 
-    public function pegar_id_usuario(){
+    public function pegar_id_usuario($id){
         $table = $this->table_usuario;
         $id_usuario = $this->query("SELECT id
-        FROM $table");
+        FROM $table
+        WHERE id = '$id'");
         return $id_usuario;
     }
 
-    public function inserir_ranking(){
+    public function inserir_ranking($pontuacao){
+        $id_usuario = $this->pegar_id_usuario();
+        $id_quiz = $this->pegar_id_quiz();
+        
+
         $table = $this->table_ranking;
         $resultado = $this->query("INSERT INTO $table 
         (pontuacao, id_quiz, id_usuario)
