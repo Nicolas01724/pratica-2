@@ -37,6 +37,8 @@ require_once ROOT_PATH.CONTROLLER_PATH. "/memoria.php";
 Router::use("/jogodamemoria", new Memoria_controller() );
 
 require_once ROOT_PATH.CONTROLLER_PATH. "/grafico.php";
-Router::use("/admin/estatistica", new Grafico_controller() );
+Router::use("/admin", new Grafico_controller() );
+Router::GET('/adm/estatisticas', fn () => include ROOT_PATH . VIEW_PATH . "/adm/estatisticas.html");
+
 
 // Router::privado();

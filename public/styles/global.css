@@ -1,12 +1,134 @@
-::root {
-    --font-texto: "Inter", Sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --color-primary: #3b82f6;
+    --color-in-primary: #F3F3F3;
+    --color-primary-2: #2563eb;
+    --color-secundary: #14b8a6;
+    --color-in-secundary: #172554;
+    --color-background: #f3f4f6;
+    --color-error: #f43f5e;
+    --color-alert: #eab308;
 }
 
-*{
-    margin: 0;
+* {
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
-html, body{
-    min-height: 100vh;
+
+*, html, input, button, select, textarea {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+button, .button {
+    font-family: inherit;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    color: var(--color-in-primary);
+
+    &:hover {
+        background-color: var(--color-primary-2);
+        transition: 0.3s;
+        &.delete {
+            background-color: var(--color-error);
+            filter: brightness(0.9);
+        }
+    }
+
+    &:focus {
+        outline: 2px solid var(--color-primary);
+    }
+
+    &:disabled {
+        background-color: var(--color-secundary);
+        color: var(--color-in-secundary);
+        cursor: not-allowed;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &.success {
+        background-color: var(--color-secundary);
+        color: white;
+    }
+
+    &.error {
+        background-color: var(--color-error);
+        color: white;
+    }
+
+    &.alert {
+        background-color: var(--color-alert);
+        color: white;
+    }
+
+    &.delete {
+        background-color: var(--color-error);
+    }
+}
+
+input, select, textarea {
+    box-sizing: border-box;
+    font-weight: bold;
+    transition: border-color 0.2s ease-in-out;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    padding: 0.8rem 0.9rem;
+
+    &:focus {
+        /* border: 2px solid var(--color-primary); */
+        outline: 2px solid var(--color-primary);
+    }
+
+    &.error {
+        border-color: var(--color-error);
+    }
+
+    &.success {
+        border-color: var(--color-secundary);
+    }
+}
+
+.message {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    display: flex;
+    font-weight: bold;
+    gap: 1rem;
+    align-items: center;
+}
+
+.message .icon {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.message.error {
+    background-color: var(--color-error);
+    color: white;
+}
+
+.message.error .icon svg {
+    color: white;
+    fill: white;
+}
+
+.message.alert {
+    background-color: var(--color-alert);
+    color: white;
+}
+
+.message.alert .icon svg {
+    color: white;
+    fill: white;
 }

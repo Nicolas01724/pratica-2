@@ -1,0 +1,68 @@
+    <!--Load the AJAX API-->
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+
+      // async function getInformations(metodo_um, metodo_dois, id) {
+      //   const response = fetch(`http://localhost:50/admin/estatistica?metodo_um=${metodo_um}&metodo_dois${metodo_dois}&id=${id}`, {
+      //       method: 'GET'
+      //   })
+      //   const resposta = await response.json()
+
+      //   return resposta
+      // }
+
+      async function drawChart() {
+
+        // Get gender user informations
+        const metodo_um = 'genero'
+        const metodo_dois = null
+        const id = 1
+
+        // http://localhost:50/admin/
+
+        const response = await fetch(`/admin?metodo_um=${metodo_um}&metodo_dois=${metodo_dois}&id=${id}`, {
+          method: 'GET'
+        })
+
+        console.log(response)
+        const resposta = await response.json()
+        console.log(resposta)
+        console.log(resposta)
+        const info_1 = resposta.filter(({ genero }) => genero == "masculino")
+        const info_2 = resposta.filter(({ genero }) => genero == "feminino")
+
+
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Masculino', info_1.length],
+          ['Feminino', info_2.length],
+        ]);
+
+        // Set chart options
+        var options = {
+            'title':'Porcentagem de sexo por alunos',
+            'width':500,
+            'height':300
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
