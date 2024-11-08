@@ -32,7 +32,7 @@ class Grafico_controller implements Controller {
       $resposta = $grafico->visualizar_usuarios_escola($id); // DÚVIDA: Ta certo esse parâmetro? 
       return $resposta;
   
-    } else if(($metodo_um == 'genero') && ($metodo_dois == 'null')) {
+    } else if(($metodo_um == 'genero') && ($metodo_dois == null)) {
       $resposta = $grafico->visualizar_usuarios_genero();
       echo($resposta);
       return $resposta;

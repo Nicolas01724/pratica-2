@@ -57,19 +57,11 @@ class Usuario extends Database{
         return $data;
     }
 
-<<<<<<< HEAD
     function validar() {
         $resposta = $this->query("SELECT $escolaridade FROM usuario WHERE id = $id;"); // ver da onde vem esse id
         $categoria_um = 0;
         $categoria_dois = 0;
         $categoria_tres = 0;
-=======
-    // function validar() {
-    //     $resposta = $this->query("SELECT $escolaridade FROM usuario WHERE id = $id;") // ver da onde vem esse id
-    //     $categoria_um = 0;
-    //     $categoria_dois = 0;
-    //     $categoria_tres = 0;
->>>>>>> 955836b7b16d68415dcd4c3892dcb42fd42113fa
 
     //     if (($resposta = "1")){
 
@@ -94,4 +86,5 @@ class Usuario extends Database{
     //         return $resposta;
     //     }
     // }
+    }
 }
