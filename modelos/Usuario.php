@@ -58,6 +58,7 @@ class Usuario extends Database{
         return $data;
     }
 
+<<<<<<< HEAD
     // function validar() {
     //     $resultado = $this->query("SELECT escolaridade FROM usuario WHERE id = $id;") // ver da onde vem esse id
        
@@ -67,6 +68,14 @@ class Usuario extends Database{
     //     }
        
     //     return false; // caso não encontre nenhum usuario
+=======
+    function validar() {
+        $resposta = $this->query("SELECT $escolaridade FROM usuario WHERE id = $id;"); // ver da onde vem esse id
+        $categoria_um = 0;
+        $categoria_dois = 0;
+        $categoria_tres = 0;
+>>>>>>> a6663f92195148dc5921029e0ef4c54721501929
 
     // }
+    }
 }

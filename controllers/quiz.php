@@ -131,6 +131,15 @@ class Quiz_controller implements Controller{
             die('Oooooops');
         }
 
+        foreach ($_GET as $key => $value) {
+            $name = "_$key";
+            $$name = $value;
+        }
+
+
+        $dados = $quiz->inserir_ranking($id);
+        $pontuacao = $quiz->pegar_pontuacao($id);
+
         include ROOT_PATH . VIEW_PATH . '\quiz\zerou.php';
     }
 }

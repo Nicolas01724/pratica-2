@@ -74,7 +74,6 @@ function temporizador(){
 
 function telaZerou(){
     window.location.href = "/quiz/zerou?id=1&pontuacao=1";
-    zerarJogo()
 }
 
 function zerarJogo(){

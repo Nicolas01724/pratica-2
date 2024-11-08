@@ -45,6 +45,7 @@ Router::filtro('fundamental_2');
 // Router::privado();
 Router::filtro('ensino_medio');
 require_once ROOT_PATH . CONTROLLER_PATH . "\quiz.php";
+
 $quiz_controller = new Quiz_controller();
 Router::use('/', $quiz_controller);
 Router::GET('/quiz/botao_proximo', fn () => $quiz_controller->proximo());
@@ -54,5 +55,7 @@ Router::GET('/quiz/zerou', fn() => $quiz_controller->zerou());
 
 // router adm
 
+require_once ROOT_PATH.CONTROLLER_PATH. "/grafico.php";
+Router::use("/admin/estatistica", new Grafico_controller() );
 
-
+// Router::privado();
