@@ -57,35 +57,41 @@ class Usuario extends Database{
         return $data;
     }
 
+<<<<<<< HEAD
     function validar() {
         $resposta = $this->query("SELECT $escolaridade FROM usuario WHERE id = $id;"); // ver da onde vem esse id
         $categoria_um = 0;
         $categoria_dois = 0;
         $categoria_tres = 0;
+=======
+    // function validar() {
+    //     $resposta = $this->query("SELECT $escolaridade FROM usuario WHERE id = $id;") // ver da onde vem esse id
+    //     $categoria_um = 0;
+    //     $categoria_dois = 0;
+    //     $categoria_tres = 0;
+>>>>>>> 955836b7b16d68415dcd4c3892dcb42fd42113fa
 
-        if (($resposta = "1")){
+    //     if (($resposta = "1")){
 
-            // $categoria_um = 1;
-            // $categoria_dois = 0;
-            // $categoria_tres = 0;
-            $resposta == 1;
-            return $resposta;
-        }
-        if ($resposta = "2"){
-            // $categoria_um = 1;
-            // $categoria_dois = 1;
-            // $categoria_tres = 0;
-            $resposta == 2;
-            return $resposta;
-        }
-        if ($resposta = "3"){
-        //     $categoria_um = 1;
-        //     $categoria_dois = 1;
-        //     $categoria_tres = 1;
-            $resposta == 3;
-            return $resposta;
-        }
-
-    
-    }
+    //         // $categoria_um = 1;
+    //         // $categoria_dois = 0;
+    //         // $categoria_tres = 0;
+    //         $resposta == 1;
+    //         return $resposta;
+    //     }
+    //     if ($resposta = "2"){
+    //         // $categoria_um = 1;
+    //         // $categoria_dois = 1;
+    //         // $categoria_tres = 0;
+    //         $resposta == 2;
+    //         return $resposta;
+    //     }
+    //     if ($resposta = "3"){
+    //     //     $categoria_um = 1;
+    //     //     $categoria_dois = 1;
+    //     //     $categoria_tres = 1;
+    //         $resposta == 3;
+    //         return $resposta;
+    //     }
+    // }
 }
