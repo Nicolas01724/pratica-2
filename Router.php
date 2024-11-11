@@ -77,10 +77,10 @@ class Router {
             "fundamental_1" => 1,
         ];
 
-        if (!isset($_SESSION["escolaridade"])) die("Acesso negado!");
+        // if (!isset($_SESSION["escolaridade"])) die("Acesso negado!");
 
-        $tipo_usuario = $_SESSION["escolaridade"];
+        // $tipo_usuario = $_SESSION["escolaridade"];
 
-        if (!($tipo_usuario >= $tipos[$tipo])) die("Acesso negado!"); 
+        // if (!($tipo_usuario >= $tipos[$tipo])) die("Acesso negado!"); 
     }
 }

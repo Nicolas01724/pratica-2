@@ -32,7 +32,10 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return json_encode($response);
+
+        print_r($response);
+
+        return $response;
     }
 
 
@@ -121,7 +124,7 @@ class Graficos extends Database {
             $data[] = $row;
         }
 
-        return json_encode($data);
+        return $data;
     }
 
 }
