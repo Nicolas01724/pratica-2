@@ -58,7 +58,7 @@ Router::GET('/quiz/zerou', fn() => $quiz_controller->zerou());
 require_once ROOT_PATH.CONTROLLER_PATH. "/grafico.php";
 $grafico_controller = new Grafico_controller();
 Router::use("/admin", $grafico_controller );
-Router::GET('/adm/estatisticas', fn () => $grafico_controller->mostrar_grafico());
+Router::GET('/adm/estatisticas', fn () => $grafico_controller->POST());
 
 
 // Router::privado();

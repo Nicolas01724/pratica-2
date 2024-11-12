@@ -1,3 +1,20 @@
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<div id="infos">
+  <input type="number" value="<?= $info_um ?>" id="info_dois">
+  <input type="number" value="<?= $info_um ?>" id="info_um" >
+</div>
+
+
+<style>
+  #infos {
+    display: none;
+  }
+
+</style>
+
 <script type="text/javascript">
     
 
@@ -10,11 +27,9 @@
     function drawChart() {
       // Criação da tabela de dados para o gráfico
 
-      const metodo_um = document.getElementById("metodo_um").value;
-      const metodo_dois = document.getElementById("metodo_dois").value;
       
-      const info_um = parseInt(document.getElementById("info1").value);
-      const info_dois = parseInt(document.getElementById("info2").value);
+      const info_um = parseInt(document.getElementById("info_um").value);
+      const info_dois = parseInt(document.getElementById("info_dois").value);
 
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Sexo');

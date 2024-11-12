@@ -167,3 +167,11 @@ table td a {
         background-color: var(--color-error);
     }
 }
+
+#info_um {
+    display: hidden;
+}
+
+#info_dois {
+    display: hidden;
+}
