@@ -43,8 +43,16 @@ class Quiz extends Database{
 
     public function pegar_uma_pergunta(string|int $id) {
         $table = $this->table_pergunta;
-        $resultado = $this->visualizar_um($table, ["id", "texto_pergunta", "codigo_imagem", "id_quiz"], $id);
-        return $resultado;
+        $tipos = [
+            "ensino_medio" => 3,
+            "fundamental_2" => 2,
+            "fundamental_1" => 1,
+        ];
+
+        $escolaridade = $_SESSION['escolaridade'];
+        
+        $resposta = $this->query("SELECT * from pergunta_quiz INNER JOIN quiz on quiz.id = quiz_id WHERE escolaridade = $tipo; ")
+
     }
 
     public function pegar_uma_resposta(string|int $id) {
@@ -90,4 +98,6 @@ class Quiz extends Database{
         WHERE id_usuario = '$id'");
         return $resultado;
     }
+
+
 }
