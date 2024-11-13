@@ -17,8 +17,22 @@ class Quiz_controller implements Controller{
     }
     
     public function GET(){
+        // return;
+        global $quiz;
+        $data = $quiz->pegar_uma_pergunta(1);
+        
+        // echo json_encode($data);
+        $index = rand(0, sizeof($data) -1);
+        $pergunta = $data[$index];
+        $respostas = $quiz->listar_alternativas($pergunta['id']);
+
+        $letras = ["A", "B", "C"];
+        for ($i = 0; $i < sizeof($respostas); $i++) {
+            $respostas[$i]["letra"] = $letras[$i];
+        }
+
         include ROOT_PATH . VIEW_PATH . '\quiz\index.php';
-        return;
+        
     }
     
     public function PUT(){}
@@ -60,7 +74,6 @@ class Quiz_controller implements Controller{
         // die();
 
 
-        
         $perguntas = $quiz->listar_perguntas($_escolaridade);
         
         $pergunta_que_vai_voltar = [];
@@ -87,7 +100,8 @@ class Quiz_controller implements Controller{
         include ROOT_PATH . VIEW_PATH . '\quiz\questao.php';
     }
     
-    public function responder() {
+    public function responder( $pergunta) {
+        global $pergunta;
         global $quiz;
         if (!assert_array_keys(['id', 'resposta', 'questas'], $_GET)) {
             header('HTTP/1.1 500 Internal Server Error');

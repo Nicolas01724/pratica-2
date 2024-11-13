@@ -26,6 +26,7 @@ class Quiz extends Database{
         }
         return $data;
     }
+
     public function listar_alternativas(string|int $question_id): array{
         $table = $this->table_alternativa;
         $resposta = $this->query(
@@ -44,15 +45,27 @@ class Quiz extends Database{
     public function pegar_uma_pergunta(string|int $id) {
         $table = $this->table_pergunta;
         $tipos = [
-            "ensino_medio" => 3,
-            "fundamental_2" => 2,
-            "fundamental_1" => 1,
+             3 => "Ensino Médio", 
+             2 => "Séries Finais",
+             1 =>"Séries Iniciais",
         ];
-
-        $escolaridade = $_SESSION['escolaridade'];
+      
+        $_SESSION['escolaridade'] = 3;
+        $tipo_usuario = $_SESSION['escolaridade'];
+        $tipo = $tipos[$tipo_usuario];
         
-        $resposta = $this->query("SELECT * from pergunta_quiz INNER JOIN quiz on quiz.id = quiz_id WHERE escolaridade = $tipo; ")
+        $resposta = $this->query("SELECT pergunta_quiz.id as id, texto_pergunta from pergunta_quiz INNER JOIN quiz on quiz.id = id_quiz WHERE escolaridade = '$tipo' ;");
 
+        $data = [];
+        if ($resposta->num_rows > 1) {
+            while($row = $resposta->fetch_assoc()) {
+                $data[] = $row;
+            }
+        } else {
+            $data = $resposta->fetch_assoc();
+        }
+
+        return $data;
     }
 
     public function pegar_uma_resposta(string|int $id) {

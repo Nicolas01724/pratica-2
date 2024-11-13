@@ -33,17 +33,6 @@ Router::use("/jogodamemoria", new Memoria_controller() );
 //jogo 7 erros
 //quiz
 
-
-Router::filtro('fundamental_2');
-// series finais
-// quiz
-// caça palavras
-// forca
-
-
-// ensino médio
-// Router::privado();
-Router::filtro('ensino_medio');
 require_once ROOT_PATH . CONTROLLER_PATH . "\quiz.php";
 
 $quiz_controller = new Quiz_controller();
@@ -52,6 +41,18 @@ Router::GET('/quiz/botao_proximo', fn () => $quiz_controller->proximo());
 Router::GET('/quiz/gerar', fn () => $quiz_controller->gerarQuiz());
 Router::GET('/quiz/responder', fn () => $quiz_controller->responder());
 Router::GET('/quiz/zerou', fn() => $quiz_controller->zerou());
+
+
+
+// series finais
+// quiz
+// caça palavras
+// forca
+
+
+// ensino médio
+// Router::privado();
+
 
 // router adm
 

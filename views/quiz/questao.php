@@ -29,6 +29,7 @@
         </div>
     </div>
 
+    
     <div class="respostas">
         <?php foreach ($respostas as $pergunta): ?>
             <button
