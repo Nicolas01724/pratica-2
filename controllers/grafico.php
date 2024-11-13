@@ -7,11 +7,8 @@ $grafico = new Graficos();
 class Grafico_controller implements Controller {
   public function GET() { // ver os dados, logo é necessário colocá-los dentro de uma escolha
     
-    include ROOT_PATH . VIEW_PATH . '/adm/adm.html';
+    require_once ROOT_PATH . VIEW_PATH . '/adm/adm.html';
   
-    
-   
-
   }
 
 
@@ -23,6 +20,9 @@ class Grafico_controller implements Controller {
     $metodo_um = 'genero';
     $metodo_dois = 'null';
     $id = 1;
+    $id_escola = 1;
+    $id_bairro = 1;
+    $escolar_bool = false;
 
     // if (!assert_array_keys(['id','metodo_um', 'metodo_dois'], $_GET)){
     //   header('Status: 500 internal server error');
@@ -32,69 +32,99 @@ class Grafico_controller implements Controller {
 
     global $grafico;
 
-
     if (isset($_POST['id'])) {
-      $id = $POST['id'];
+      $id = $_POST['id']; 
     }
-      
     if (isset($_POST['metodo_um'])) {
       $metodo_um = $_POST['metodo_um']; 
     }
     if (isset($_POST['metodo_dois'])) {
       $metodo_dois = $_POST['metodo_dois'];
     }
+    if (isset($_POST['id_escola'])) {
+      $id_escola = $_POST['id_escola'];
+    }
 
 
-    echo $metodo_um;
-    echo $metodo_dois;
 
 
     $resposta = null;
-    $info_um = null;
-    $info_dois = null;
-    
+
+    $info_um = 0;
+    $info_dois = 0;
+    $info_tres = 0;
 
     // Notas para FrontEnd: Mudar de acordo com o requisitado no
     if(($metodo_um == 'escola') && ($metodo_dois == 'null')) {
       //visualizar usuários por escola.
-      $resposta = $grafico->visualizar_usuarios_escola($id); // DÚVIDA: Ta certo esse parâmetro? 
+      $resposta = $grafico->visualizar_usuarios_genero_escola($id_escola);
       
-      $info_um_a = $resposta[0];
+      if(isset($resposta[0])) {
+        $info_um = $resposta[0];
+      }
       // print_r($info_um);
-      $info_dois_a = $resposta[1];
-
-      $info_um = $info_um_a["Total"];
-      $info_dois = $info_dois_a["Total"];
+      if (isset($resposta[1])) {
+        $info_dois = $resposta[1];
+      }
+      
+      if ($info_um != 0) {
+        $info_um = $info_um["Total"];
+      }
+      if ($info_dois != 0) {
+        $info_dois = $info_dois["Total"];
+      }
   
     } else if(($metodo_um == 'genero') && ($metodo_dois == 'null')) {
       $resposta = $grafico->visualizar_usuarios_genero();
       // print_r($resposta);
-
-      $info_um_a = $resposta[0];
+      if(isset($resposta[0])) {
+        $info_um = $resposta[0];
+      }
       // print_r($info_um);
-      $info_dois_a = $resposta[1];
-
-      $info_um = $info_um_a["Total"];
-      $info_dois = $info_dois_a["Total"];
+      if (isset($resposta[1])) {
+        $info_dois = $resposta[1];
+      }
       
-      // echo json_encode(['info_um' => $info_um, 'info_dois' => $info_dois]);
-
-    } else if(($metodo_um == 'escola') && ($metodo_dois == 'genero') ){
-      // visualizar usuaário por genero na escola.
-      $resposta = $grafico->visualizar_usuarios_genero_escola( $id); // DÚVIDA: Ta certo esse parâmetro? 
-
+      if ($info_um != 0) {
+        $info_um = $info_um["Total"];
+      }
+      if ($info_dois != 0) {
+        $info_dois = $info_dois["Total"];
+      }
       
-
-      return $resposta;
-
-    } else if(($metodo_um == 'escolaridade') && ($metodo_dois == 'bairro')){
+    } else if(($metodo_um == 'bairro') && ($metodo_dois == 'null')){
       // visualizar usuários por escolaridade no bairro.
-      $resposta = $grafico->visualizar_usuarios_escolaridade_bairro($escolaridade,  $bairro); // DÚVIDA: qual parâmetro colocar?
-      return $resposta;
+      $resposta = $grafico->visualizar_usuarios_escolaridade_bairro($id_bairro); // DÚVIDA: qual parâmetro colocar?
+      
+      $escolar_bool = true;
 
-    } else if(($metodo_um == 'escolaridade') && ($metodo_dois == 'cidade')){
+      if(isset($resposta[0])) {
+        $info_um = $resposta[0];
+      }
+      // print_r($info_um);
+      if (isset($resposta[1])) {
+        $info_dois = $resposta[1];
+      }
+
+      if (isset($resposta[2])) {
+        $info_tres = $resposta[2];
+      }
+      
+      if ($info_um != 0) {
+        $info_um = $info_um["Total"];
+      }
+
+      if ($info_dois != 0) {
+        $info_dois = $info_dois["Total"];
+      }
+      
+      if ($info_tres != 0) {
+        $info_tres = $info_tres["Total"];
+      }
+      
+    } else if(($metodo_um == 'cidade') && ($metodo_dois == 'null')){
       //visualizar usuários por escolaridade na cidade
-      $resposta = $grafico->visualizar_usuarios_escolaridade_cidade($escolaridade, $cidade); // DÚVIDA: qual parâmetro colocar?
+      $resposta = $grafico->visualizar_usuarios_escolaridade_cidade($cidade); // DÚVIDA: qual parâmetro colocar?
       return $resposta;
     
 
@@ -109,8 +139,13 @@ class Grafico_controller implements Controller {
     } else {
       print_r('Algo está errado'); // TIRAR ESSE PRINT E MODIFICAR NA REVISÃO!!!!!
     }
+    
+    if (!$escolar_bool) {
+      include ROOT_PATH . VIEW_PATH . "/adm/gerar-grafico-genero.php";
+    } else {
+      include ROOT_PATH . VIEW_PATH . "/adm/gerar-grafico-escolaridade.php";
+    }
 
-    include ROOT_PATH . VIEW_PATH . '/adm/gerar-grafico.php';
   }
   public function PUT() {
     die('Error 404 page not found');
@@ -119,83 +154,4 @@ class Grafico_controller implements Controller {
     die('Error 404 page not found');
   }
 
-  // public function mostrar_grafico() {
-
-  //   $metodo_um = 'genero';
-  //   $metodo_dois = 'null';
-  //   $id = 1;
-
-  //   // if (!assert_array_keys(['id','metodo_um', 'metodo_dois'], $_GET)){
-  //   //   header('Status: 500 internal server error');
-  //   //   die("Variaveis erradas!");
-  //   // } 
-    
-
-  //   global $grafico;
-
-  //   try {
-  //     if (isset($_GET['id'])) $id = $_GET['id']; 
-  //     if (isset($_GET['metodo_um'])) $metodo_um = $_GET['metodo_um']; 
-  //     if (isset($_GET['metodo_dois'])) $metodo_dois = $_GET['metodo_dois'];
-  //   } catch(Exception $e) {
-
-  //   };
-
-
-  //   $resposta = null;
-
-  //   $info_um = null;
-  //   $info_dois = null;
-    
-
-  //   // Notas para FrontEnd: Mudar de acordo com o requisitado no
-  //   if(($metodo_um == 'escola') && ($metodo_dois == null)) {
-  //     //visualizar usuários por escola.
-  //     $resposta = $grafico->visualizar_usuarios_escola($id); // DÚVIDA: Ta certo esse parâmetro? 
-  //     return $resposta;
-  
-  //   } else if(($metodo_um == 'genero') && ($metodo_dois == 'null')) {
-  //     $resposta = $grafico->visualizar_usuarios_genero();
-  //     // print_r($resposta);
-
-  //     $info_um_a = $resposta[0];
-  //     // print_r($info_um);
-  //     $info_dois_a = $resposta[1];
-
-  //     $info_um = $info_um_a["Total"];
-  //     $info_dois = $info_dois_a["Total"];
-      
-  //     echo json_encode(['info_um' => $info_um, 'info_dois' => $info_dois]);
-
-  //   } else if(($metodo_um == 'escola') && ($metodo_dois == 'genero') ){
-  //     // visualizar usuaário por genero na escola.
-  //     $resposta = $grafico->visualizar_usuarios_genero_escola( $id); // DÚVIDA: Ta certo esse parâmetro? 
-  //     return $resposta;
-
-  //   } else if(($metodo_um == 'escolaridade') && ($metodo_dois == 'bairro')){
-  //     // visualizar usuários por escolaridade no bairro.
-  //     $resposta = $grafico->visualizar_usuarios_escolaridade_bairro($escolaridade,  $bairro); // DÚVIDA: qual parâmetro colocar?
-  //     return $resposta;
-
-  //   } else if(($metodo_um == 'escolaridade') && ($metodo_dois == 'cidade')){
-  //     //visualizar usuários por escolaridade na cidade
-  //     $resposta = $grafico->visualizar_usuarios_escolaridade_cidade($escolaridade, $cidade); // DÚVIDA: qual parâmetro colocar?
-  //     return $resposta;
-    
-
-  //   } else if(($metodo_um == 'escolaridade') && ($metodo_dois == 'escola')){
-  //     $resposta = $grafico->visualizar_usuarios_escolaridade_escola($escolaridade, $id); // DÚVIDA: qual parâmetro colocar?
-  //     return $resposta;
-
-  //   } else if(($metodo_um == 'escolaridade') && ($metodo_dois == 'genero')){
-  //     $resposta = $grafico->visualizar_usuarios_escolaridade_genero($escolaridade, $genero); // DÚVIDA: qual parâmetro colocar?
-  //     return $resposta;
-
-  //   } else {
-  //     print_r('Algo está errado'); // TIRAR ESSE PRINT E MODIFICAR NA REVISÃO!!!!!
-  //   }
-
-  //   include ROOT_PATH . VIEW_PATH . '/adm/estatisticas.php';
-
-  // }
 }

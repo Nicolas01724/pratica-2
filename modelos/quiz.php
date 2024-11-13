@@ -54,18 +54,8 @@ class Quiz extends Database{
         $tipo_usuario = $_SESSION['escolaridade'];
         $tipo = $tipos[$tipo_usuario];
         
-        $resposta = $this->query("SELECT pergunta_quiz.id as id, texto_pergunta from pergunta_quiz INNER JOIN quiz on quiz.id = id_quiz WHERE escolaridade = '$tipo' ;");
+        $resposta = $this->query("SELECT * from pergunta_quiz INNER JOIN quiz on quiz.id = quiz_id WHERE escolaridade = $tipo; ");
 
-        $data = [];
-        if ($resposta->num_rows > 1) {
-            while($row = $resposta->fetch_assoc()) {
-                $data[] = $row;
-            }
-        } else {
-            $data = $resposta->fetch_assoc();
-        }
-
-        return $data;
     }
 
     public function pegar_uma_resposta(string|int $id) {
