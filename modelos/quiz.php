@@ -51,7 +51,7 @@ class Quiz extends Database{
 
         $escolaridade = $_SESSION['escolaridade'];
         
-        $resposta = $this->query("SELECT * from pergunta_quiz INNER JOIN quiz on quiz.id = quiz_id WHERE escolaridade = $tipo; ")
+        $resposta = $this->query("SELECT * from pergunta_quiz INNER JOIN quiz on quiz.id = quiz_id WHERE escolaridade = $tipo; ");
 
     }
 

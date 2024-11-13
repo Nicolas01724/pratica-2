@@ -21,28 +21,12 @@ class Graficos extends Database {
     // SESSÃO POR ESCOLA 
 
     // visualizar usuários por escola.
-    public function visualizar_usuarios_escola(int $escola_id): array {
-        $query = "SELECT COUNT(usuario.id) AS 'Total', escola.nome AS 'Nome da escola', cidade.nome AS 'Cidade da escola', bairro.nome AS 'Bairro da escola' FROM usuario 
-        INNER JOIN escola ON usuario.id_escola = escola.id INNER JOIN bairro ON escola.id_bairro = bairro.id INNER JOIN cidade ON bairro.id_cidade = cidade.id GROUP BY escola.nome, cidade.nome, bairro.nome;";
     
-        $result = $this->query($query);
-        
-        $response = [];
-
-        while ($row = $result->fetch_assoc()){
-            $response[] = $row;
-        }
-
-        print_r($response);
-
-        return $response;
-    }
 
 
     // visualizar usuaário por genero na escola.
     public function visualizar_usuarios_genero_escola(int $id_escola) {
-        $query = "SELECT genero AS 'Gênero', COUNT(usuario.id) AS 'Total', escola.nome AS 'Nome da escola', escola.cidade AS 'Cidade da escola', escola.bairro AS 'Bairro da escola' FROM usuario 
-        INNER JOIN escola ON usuario.id_escola = escola.id INNER JOIN bairro ON escola.id_bairro = bairro.id INNER JOIN cidade ON bairro.id_cidade = cidade.id GROUP BY escola.nome, cidade.nome, bairro.nome;";
+        $query = "SELECT usuario.genero AS 'Gênero', COUNT(usuario.id) AS 'Total' FROM usuario INNER JOIN escola ON usuario.id_escola = escola.id WHERE escola.id = $id_escola GROUP BY usuario.genero;";
        
         $result = $this->query($query);
         
@@ -51,14 +35,14 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return json_encode($response);
+        return $response;
     } 
 
         // SESSÃO POR ESCOLARIDADE
         
     // visualizar usuários por escolaridade no bairro. 
-    function visualizar_usuarios_escolaridade_bairro(string $escolaridade, string $bairro) {
-        $query = "SELECT COUNT(usuario.id) AS Total FROM usuario INNER JOIN escola ON escola.id = usuario.id_escola INNER JOIN bairro ON bairro.id = usuario.id_bairro WHERE usuario.escolaridade = '$escolaridade' AND usuario.id_bairro = '$bairro';";
+    function visualizar_usuarios_escolaridade_bairro(int $id_bairro): array {
+        $query = "SELECT COUNT(usuario.id) AS Total,escolaridade FROM usuario INNER JOIN escola ON escola.id = usuario.id_escola INNER JOIN bairro ON bairro.id = usuario.id_bairro WHERE usuario.id_bairro = '$id_bairro' GROUP BY usuario.nome,usuario.escolaridade;";
         
         $result = $this->query($query);
         
@@ -67,7 +51,20 @@ class Graficos extends Database {
         while ($row = $result->fetch_assoc()){
             $response[] = $row;
         }
-        return json_encode($response);
+        return $response;
+    }
+
+    function visualizar_usuarios_escolaridade_cidade(int $id_cidade): array {
+        $query = "SELECT COUNT(usuario.id) AS 'Total' FROM usuario INNER JOIN bairro ON bairro.id = usuario.id_bairro INNER JOIN cidade ON cidade.id = bairro.id_cidade WHERE cidade.id = '$id_cidade' ;";
+        
+        $result = $this->query($query);
+        
+        $response = [];
+
+        while ($row = $result->fetch_assoc()){
+            $response[] = $row;
+        }
+        return $response;
     }
 
     // visualizar usuarios por escolaridade na escola
