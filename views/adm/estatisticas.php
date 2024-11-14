@@ -4,16 +4,12 @@
 <div>
   <form method="POST" action="/admin">
     <Select name="metodo_um">
-      <option value="genero">genero</option>
-      <option value="escola">Gênero por escola</option>
+      <option value="genero">Todos os usuários por gênero</option>
+      <option value="escola">Gênero dos usuários por escola</option>
       <option value="escolaridadePorEscola">Escolaridade por escola</option>
-      <option value="bairro">bairro</option>
-      <option value="cidade">cidade</option>
+      <option value="bairro">Escolaridade dos usuários por bairro</option>
+      <option value="cidade">Escolaridade dos usuários por cidade</option>
       <option value="escolaridadeGenero">Gênero por escolaridade</option>
-    </Select>
-
-    <Select name="metodo_dois">
-      <option value="null">Nenhum</option>
     </Select>
     
     <Select name="id_escola">
@@ -238,9 +234,9 @@
     </Select>
 
     <Select name="escolaridade">
-      <option value="Fundamental">Séries Iniciais</option>
-      <option value="Superior">Séries Finais</option>
-      <option value="Medio">Ensino Médio</option>
+      <option value="Séries Iniciais">Séries Iniciais</option>
+      <option value="Séries Finais">Séries Finais</option>
+      <option value="Ensino Médio">Ensino Médio</option>
     </Select>
 
 

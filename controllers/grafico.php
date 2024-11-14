@@ -18,18 +18,13 @@ class Grafico_controller implements Controller {
     include ROOT_PATH . VIEW_PATH . '/adm/estatisticas.php';
 
     $metodo_um = 'genero';
-    $metodo_dois = 'null';
     $id = 1;
     $id_escola = 1;
     $id_bairro = 1;
     $id_cidade = 1;
     $escolaridade_bool = false;
-    $escolaridade = 'Fundamental';
+    $escolaridade = 'Séries Inicias';
 
-    // if (!assert_array_keys(['id','metodo_um', 'metodo_dois'], $_GET)){
-    //   header('Status: 500 internal server error');
-    //   die("Variaveis erradas!");
-    // } 
     
 
     global $grafico;
@@ -63,7 +58,7 @@ class Grafico_controller implements Controller {
     $info_tres = 0;
 
     // Notas para FrontEnd: Mudar de acordo com o requisitado no
-    if(($metodo_um == 'escola') && ($metodo_dois == 'null')) {
+    if($metodo_um == 'escola') {
       //visualizar usuários por escola.
       $resposta = $grafico->visualizar_usuarios_genero_escola($id_escola);
       
@@ -75,7 +70,7 @@ class Grafico_controller implements Controller {
         }
       }
   
-    } else if(($metodo_um == 'genero') && ($metodo_dois == 'null')) {
+    } else if($metodo_um == 'genero') {
       $resposta = $grafico->visualizar_usuarios_genero();
       // print_r($resposta);
       foreach ($resposta as $resultado) {
@@ -86,49 +81,49 @@ class Grafico_controller implements Controller {
         }
       }
       
-    } else if(($metodo_um == 'bairro') && ($metodo_dois == 'null')){
+    } else if($metodo_um == 'bairro'){
       // visualizar usuários por escolaridade no bairro.
       $resposta = $grafico->visualizar_usuarios_escolaridade_bairro($id_bairro); // DÚVIDA: qual parâmetro colocar?
       
       $escolaridade_bool = true;
 
       foreach ($resposta as $info) {
-        if ($info['escolaridade'] === 'Iniciais') {
+        if ($info['escolaridade'] === 'Séries Iniciais') {
             $info_um = $info['Total'];
-        } elseif ($info['escolaridade'] === 'Finais') {
+        } elseif ($info['escolaridade'] === 'Séries Finais') {
             $info_dois = $info['Total'];
-        } elseif ($info['escolaridade'] === 'Médio') {
+        } elseif ($info['escolaridade'] === 'Ensino Médio') {
             $info_tres = $info['Total'];
         }
       }
       
-    } else if(($metodo_um == 'cidade') && ($metodo_dois == 'null')){
+    } else if($metodo_um == 'cidade'){
       //visualizar usuários por escolaridade na cidade
       $resposta = $grafico->visualizar_usuarios_escolaridade_cidade($id_cidade); // DÚVIDA: qual parâmetro colocar?
       
       $escolaridade_bool = true;
 
       foreach ($resposta as $info) {
-        if ($info['escolaridade'] === 'Iniciais') {
+        if ($info['escolaridade'] === 'Séries Iniciais') {
             $info_um = $info['Total'];
-        } elseif ($info['escolaridade'] === 'Finais') {
+        } elseif ($info['escolaridade'] === 'Séries Finais') {
             $info_dois = $info['Total'];
-        } elseif ($info['escolaridade'] === 'Médio') {
+        } elseif ($info['escolaridade'] === 'Ensino Médio') {
             $info_tres = $info['Total'];
         }
       }
     
-    } else if(($metodo_um == 'escolaridadePorEscola') && ($metodo_dois == 'null')){
+    } else if($metodo_um == 'escolaridadePorEscola'){
       $resposta = $grafico->visualizar_usuarios_escolaridade_escola($id_escola); // DÚVIDA: qual parâmetro colocar?
       
       $escolaridade_bool = true;
 
       foreach ($resposta as $info) {
-        if ($info['escolaridade'] === 'Iniciais') {
+        if ($info['escolaridade'] === 'Séries Iniciais') {
             $info_um = $info['Total'];
-        } else if ($info['escolaridade'] === 'Finais') {
+        } else if ($info['escolaridade'] === 'Séries Finais') {
             $info_dois = $info['Total'];
-        } else if ($info['escolaridade'] === 'Médio') {
+        } else if ($info['escolaridade'] === 'Ensino Médio') {
             $info_tres = $info['Total'];
         }
       }
