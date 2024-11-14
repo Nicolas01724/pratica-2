@@ -5,8 +5,11 @@
   <form method="POST" action="/admin">
     <Select name="metodo_um">
       <option value="genero">genero</option>
-      <option value="escola">escola</option>
+      <option value="escola">Gênero por escola</option>
+      <option value="escolaridadePorEscola">Escolaridade por escola</option>
       <option value="bairro">bairro</option>
+      <option value="cidade">cidade</option>
+      <option value="escolaridadeGenero">Gênero por escolaridade</option>
     </Select>
 
     <Select name="metodo_dois">
@@ -232,6 +235,12 @@
       <option value="41">Ulysses Guimarães</option>
       <option value="42">Boa Vista</option>
       <option value="43">Bucarein</option>
+    </Select>
+
+    <Select name="escolaridade">
+      <option value="Fundamental">Séries Iniciais</option>
+      <option value="Superior">Séries Finais</option>
+      <option value="Medio">Ensino Médio</option>
     </Select>
 
 

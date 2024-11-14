@@ -45,7 +45,7 @@
       
       // Opções do gráfico
       var options = {
-        'title': 'Porcentagem de escolaridade:',
+        'title': 'Porcentagem por escolaridade:',
         'width': 500,
         'height': 300
       };

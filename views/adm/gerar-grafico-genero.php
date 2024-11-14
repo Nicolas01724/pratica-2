@@ -42,7 +42,7 @@
       
       // Opções do gráfico
       var options = {
-        'title': 'Porcentagem de sexo:',
+        'title': 'Porcentagem por gênero:',
         'width': 500,
         'height': 300
       };
