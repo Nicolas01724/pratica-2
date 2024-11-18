@@ -35,17 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div id="main">
-    <SELECT name="colaborador">
-        <?php 
-        
-        $data = $conn->mostrar_colaboradores();
 
-        print_r($data);
-
-        foreach($data as $user) { ?>
-        <option value="<= $user['id'] ?>"><= $user['nome'] ?></option>
-        <?php } ?>
-    </SELECT>
     </div>
     <button hx-post="/cadastrar.php" hx-trigger="click" hx-target="#main" hx-swap="innerHTML">Cadastrar</button>
     <button hx-post="/chamado-cadastro.php" hx-trigger="click" hx-target="#main" hx-swap="innerHTML">Criar chamado</button>
