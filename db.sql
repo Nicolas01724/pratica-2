@@ -1,61 +1,30 @@
-DROP DATABASE IF EXISTS EPTRAN_DS24M2;
-CREATE DATABASE EPTRAN_DS24M2;
-USE EPTRAN_DS24M2;
+CREATE DATABASE pratica_nicolas;
 
-CREATE TABLE jogo (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nome VARCHAR(45) NOT NULL,
-    categoria VARCHAR(45) NOT NULL
-);
-
-CREATE TABLE escola (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nome VARCHAR(200) NOT NULL,
-    cidade VARCHAR(100) NOT NULL,
-    bairro VARCHAR(100) NOT NULL,
-    rua VARCHAR(100) NOT NULL,
-    numero_escola INT NOT NULL
-);
+USE pratica_nicolas;
 
 CREATE TABLE usuario (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nome VARCHAR(150) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    senha TEXT NOT NULL,
-    escolaridade VARCHAR(45) NOT NULL,
-    cidade VARCHAR(100) NOT NULL,
-    bairro VARCHAR(100) NOT NULL,
-    genero VARCHAR(20) NOT NULL,
-    data_nascimento DATE NOT NULL,
-    telefone CHAR(13) NOT NULL,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    eh_ativo BINARY NOT NULL DEFAULT 1,
-    id_escola INT NOT NULL,
-    FOREIGN KEY (id_escola) REFERENCES escola (id)
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45) NOT NULL,
+    email VARCHAR(120) NOT NULL,
+    senha VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE ranking (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    pontuacao INT NOT NULL,
-    id_jogo INT NOT NULL,
-	FOREIGN KEY (id_jogo) REFERENCES jogo (id),
+
+CREATE TABLE responsavel (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45) NOT NULL,
+    email VARCHAR(120) NOT NULL,
+    senha VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE chamado (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    descricao TEXT,
+    criticidade VARCHAR(5),
+    andamento INT,
+    abertura DATE,
     id_usuario INT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuario (id)
-);
-
-CREATE TABLE administrador (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nome VARCHAR(150) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    senha TEXT NOT NULL
-);
-
-CREATE TABLE noticia (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    titulo VARCHAR(100) NOT NULL,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    conteudo TEXT NOT NULL,
-    url_imagem TEXT NOT NULL,
-    id_administrador INT NOT NULL, 
-    FOREIGN KEY (id_administrador) REFERENCES administrador (id)
+    id_responsavel INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_responsavel) REFERENCES responsavel(id)
 );

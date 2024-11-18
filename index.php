@@ -1,65 +1,55 @@
 <?php
-require_once "config.php";
-session_start();
 
+require_once "../htdocs/connection.php";
 
-// Router::POST('/', 'escola');
+$conn = new Database();
 
-// Router::use('/','listar-escolas');
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-// Router::use("/", $user_controller);
+    if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['oque']) && isset($_POST['telefone'])) {
+        $nome = $_POST['name'];
+        $email = $_POST['email'];
+        $oque = $_POST['oque'];
+        $telefone = $_POST['telefone'];
+        if ($oque == 1) {
+            $conn->cadastrar_usuario($nome, $email, $telefone);
+        } else {
+            $conn->cadastrar_colaborador($nome, $email, $telefone);
+        }
+    }
+        
 
-require_once ROOT_PATH . CONTROLLER_PATH. "/noticias.php";
-$noticia_controller = new Noticia_controller();
-Router::use("/noticias", $noticia_controller );
+}
 
-require_once ROOT_PATH.CONTROLLER_PATH. "/grafico.php";
-$grafico_controller = new Grafico_controller();
-Router::use("/grafico", $grafico_controller );
-
-require_once ROOT_PATH.CONTROLLER_PATH. "/usuario.php";
-$usuario_controller = new Usuario_controller();
-Router::use("/usuario" , $usuario_controller);
-
-require_once ROOT_PATH.CONTROLLER_PATH. "/login.php";
-$login_controller = new Login_controller();
-Router::use("/login", $login_controller);
-
-
-
-// series iniciais 
-require_once ROOT_PATH.CONTROLLER_PATH. "/memoria.php";
-Router::use("/jogodamemoria", new Memoria_controller() );
-//jogo 7 erros
-//quiz
-
-require_once ROOT_PATH . CONTROLLER_PATH . "\quiz.php";
-
-$quiz_controller = new Quiz_controller();
-Router::use('/', $quiz_controller);
-Router::GET('/quiz/botao_proximo', fn () => $quiz_controller->proximo());
-Router::GET('/quiz/gerar', fn () => $quiz_controller->gerarQuiz());
-Router::GET('/quiz/responder', fn () => $quiz_controller->responder());
-Router::GET('/quiz/zerou', fn() => $quiz_controller->zerou());
+?>
 
 
 
-// series finais
-// quiz
-// caça palavras
-// forca
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+    <title>Chamados</title>
+</head>
+<body>
+    <div id="main">
+    <SELECT name="colaborador">
+        <?php 
+        
+        $data = $conn->mostrar_colaboradores();
 
+        print_r($data);
 
-// ensino médio
-// Router::privado();
+        foreach($data as $user) { ?>
+        <option value="<= $user['id'] ?>"><= $user['nome'] ?></option>
+        <?php } ?>
+    </SELECT>
+    </div>
+    <button hx-post="/cadastrar.php" hx-trigger="click" hx-target="#main" hx-swap="innerHTML">Cadastrar</button>
+    <button hx-post="/chamado-cadastro.php" hx-trigger="click" hx-target="#main" hx-swap="innerHTML">Criar chamado</button>
+    <button hx-post="/logar.php" hx-trigger="click" hx-target="#main" hx-swap="innerHTML">ver chamados</button>
 
-
-// router adm
-
-require_once ROOT_PATH.CONTROLLER_PATH. "/grafico.php";
-$grafico_controller = new Grafico_controller();
-Router::use("/admin", $grafico_controller );
-Router::GET('/adm/estatisticas', fn () => $grafico_controller->POST());
-
-
-// Router::privado();
+</body>
+</html>
