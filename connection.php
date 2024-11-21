@@ -1,7 +1,7 @@
 <?php
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'pratica_nicolas');
+define('DB_NAME', 'nicolassolicitacoes');
 define('DB_PASS', 'root');
 define('DB_USER', 'root');
 
@@ -10,63 +10,54 @@ class Database {
     private $conn = null;
 
     public function __construct() {
-
-
         try {
             $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             print_r($e);
             die();
         }
     }
 
-    public function cadastrar_usuario(string $nome, string $email, string $telefone) {
-
-        $query = "INSERT INTO usuario (nome, email, telefone) VALUES ('" . $nome . "', '" . $email . "', '" . $telefone . "');";
-
-        
-        $this->query($query);
-
-    }
-
-    public function cadastrar_colaborador(string $nome, string $email, string $telefone) {
-
-        $query = "INSERT INTO responsavel (nome, email, telefone) VALUES ('" . $nome . "', '" . $email . "', '" . $telefone . "');";
-
-        
-        $this->query($query);
-
-    }
-
-    public function cadastrar_chamado(string $descricao, string $criticidade,  INT $andamento, string $abertura, INT $id_usuario, INT $id_colaborador) {
-        $query = "INSERT INTO chamado (descricao, criticidade, andamento, abertura, id_colaborador) VALUES ('" . $descricao . "', '" . $criticidade . "', " . $andamento . " '" . $abertura . "' " . $id_colaborador . ");";
-
-        
+    public function cadastrar_cliente(string $nome, string $cpf, string $email, string $telefone) {
+        $query = "INSERT INTO Clientes (Nome, CPF, Email, Telefone) VALUES ('" . $nome . "', '" . $cpf . "', '" . $email . "', '" . $telefone . "');";
         $this->query($query);
     }
 
-    public function mostrar_colaboradores(): array {
-        $query = "SELECT * FROM responsavel;";
+    public function criar_solicitacao(int $id_cliente, string $descricao, string $urgencia) {
+        $query = "INSERT INTO Solicitacoes (IDCliente, Descricao, Urgencia) VALUES (" . $id_cliente . ", '" . $descricao . "', '" . $urgencia . "');";
+        $this->query($query);
+    }
 
+    public function mostrar_solicitacoes(): array {
+        $query = "SELECT * FROM Solicitacoes;";
         $result = $this->query($query);
 
         $data = [];
-
-        while($row = $result->fetch_assoc()) {
-            array_push($data, $row);
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
         }
-        print_r($data);
         return $data;
     }
 
-    public function query($raw) : bool|mysqli_result {
+    public function mostrar_clientes(): array {
+        $query = "SELECT * FROM Clientes;";
+        $result = $this->query($query);
+
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;;
+        }
+        return $data;
+    }
+
+
+    public function query($raw): bool|mysqli_result {
         return mysqli_query($this->conn, $raw);
     }
 
-    public function close()  {
+    public function close() {
         $this->conn->close();
     }
 }
-
 
 ?>

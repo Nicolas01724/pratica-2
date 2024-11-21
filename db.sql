@@ -1,35 +1,34 @@
+CREATE DATABASE nicolassolicitacoes;
+USE nicolassolicitacoes;
 
 
-CREATE DATABASE pratica_nicolas;
-
-USE pratica_nicolas;
-
-CREATE TABLE usuario (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(45) NOT NULL,
-    email VARCHAR(120) NOT NULL,
-    telefone VARCHAR(13) NOT NULL
+CREATE TABLE Clientes (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(150) NOT NULL,
+    CPF CHAR(11) UNIQUE NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Telefone VARCHAR(15) NOT NULL
 );
 
 
-CREATE TABLE responsavel (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(45) NOT NULL,
-    email VARCHAR(120) NOT NULL,
-	telefone VARCHAR(13) NOT NULL
+
+
+
+CREATE TABLE Funcionarios (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(150) NOT NULL,
+    Cargo VARCHAR(50),
+    Email VARCHAR(100) UNIQUE NOT NULL
 );
 
-CREATE TABLE chamado (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    descricao TEXT,
-    criticidade varchar(5),
-    andamento INT,
-    abertura DATE,
-    id_responsavel INT NOT NULL,
-    foreign key (id_responsavel) REFERENCES responsavel(id)
+CREATE TABLE Solicitacoes (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    IDcliente INT NOT NULL,
+    Descricao TEXT NOT NULL,
+    Urgencia ENUM('baixa', 'média', 'alta') NOT NULL,
+    pendencia ENUM('pendente', 'em andamento', 'finalizada') NOT NULL DEFAULT 'pendente',
+    DataAbertura DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    IDfuncionario INT DEFAULT NULL,
+    FOREIGN KEY (IDCliente) REFERENCES Clientes(ID),
+    FOREIGN KEY (IDfuncionario) REFERENCES Funcionarios(ID)
 );
-
-select * FROM USUARIO;
-select * from responsavel;
-SELECT * FROM responsavel;
-
